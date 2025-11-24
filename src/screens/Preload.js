@@ -2,9 +2,9 @@ import React, {useEffect, useContext} from 'react';
 import {ActivityIndicator, Text, View, Button} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 
-import styles from './styles';
-import Api from '../../Api'
-import {UserContext} from '../../contexts/UserContext';
+import styles from '../styles';
+import Api from '../Api'
+import {UserContext} from '../contexts/UserContext';
 
 function Preload({navigation}) {
 
@@ -45,3 +45,4 @@ function Preload({navigation}) {
 }
 
 export default Preload;
+

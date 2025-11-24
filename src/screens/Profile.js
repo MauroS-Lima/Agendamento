@@ -1,13 +1,13 @@
 import React from 'react';
 import {Text,View} from 'react-native'
-import styles from './styles';
+import styles from '../styles';
 
-function Home({navigation}) {
+function Profile({navigation}) {
   return(
      <View style = {styles.container}>
-      <Text>Home</Text>
+      <Text>Profile</Text>
      </View>
   );
 }
 
-export default Home;
+export default Profile;
