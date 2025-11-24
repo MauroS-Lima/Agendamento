@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import Preload from './src/screens/Preload';
-import SignIn from './src/screens/SignIn';
+import SignIn from './src/screens/SignIn/Index'
 import MainTab from './src/MainTab';
 import UserContextProvider from './src/contexts/UserContext';
 
