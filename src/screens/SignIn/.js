@@ -2,9 +2,9 @@ import React, {useState, useContext} from 'react';
 import {Text, View, Button, TextInput} from 'react-native'
 import AsyncStorage from "@react-native-community/async-storage"
 
-import styles from './styles';
-import Api from '../../Api';
-import {UserContext} from '../../contexts/UserContext';
+import styles from '../styles';
+import Api from '../Api';
+import {UserContext} from '../contexts/UserContext';
 
 async function Login(usuario, senha){
   console.log('Marcador 1')
@@ -60,3 +60,4 @@ function SignIn({navigation}) {
 }
 
 export default SignIn;
+
