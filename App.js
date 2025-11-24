@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Preload from './src/screens/Preload';
 import SignIn from './src/screens/SignIn';
-import Home from './src/screens/Home';
+import MainTab from './src/MainTab';
 import UserContextProvider from './src/contexts/UserContext';
 
 const Stack = createStackNavigator()
@@ -18,7 +18,7 @@ function App() {
           screenOptions={{headerShown: false}}>
         <Stack.Screen name="Preload" component={Preload}/>
         <Stack.Screen name="SignIn" component={SignIn}/>
-        <Stack.Screen name="Home" component={Home}/>
+        <Stack.Screen name="MainTab" component={MainTab}/>
         </Stack.Navigator>
       </NavigationContainer>
     </UserContextProvider>
