@@ -53,7 +53,7 @@ function SignIn({navigation}) {
             secureTextEntry
           />
         <Button title='Login' onPress={()=>{Login(usuario, senha)}} />
-        <Button title='home' onPress={() => navigation.navigate('Home')} />
+        <Button title='home' onPress={() => navigation.navigate('MainTab')} />
       </View>
     );
   }
