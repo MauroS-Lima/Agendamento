@@ -6,7 +6,7 @@ import styles from './styles';
 import Api from '../../Api'
 import {UserContext} from '../../contexts/UserContext';
 
-async function Preload({navigation}) {
+function Preload({navigation}) {
 
   const {dispatch: userDispatch} = useContext(UserContext)
   
@@ -25,7 +25,7 @@ async function Preload({navigation}) {
             }
           });
 
-          navigation.reset({routes:[{name:'Home'}]})
+          navigation.reset({routes:[{name:'MainTab'}]})
           
         } else{navigation.navigate('SignIn')}
       } else{
