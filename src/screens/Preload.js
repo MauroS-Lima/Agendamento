@@ -18,13 +18,6 @@ function Preload({navigation}) {
         if(res.token){
           await AsyncStorage.setitem('token', json.token);
 
-          userDispatch({
-            type: 'setAvatar',
-            payload:{
-              avatar: json.data.avatar
-            }
-          });
-
           navigation.reset({routes:[{name:'MainTab'}]})
           
         } else{navigation.navigate('SignIn')}
