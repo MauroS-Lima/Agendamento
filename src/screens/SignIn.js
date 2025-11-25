@@ -1,24 +1,23 @@
 import React, {useState, useContext} from 'react';
-import {Text, View, Button, TextInput} from 'react-native'
+import {Text, View, Button, TextInput, Image} from 'react-native'
 import AsyncStorage from "@react-native-community/async-storage"
 
 import styles from '../styles';
 import Api from '../Api';
 import {UserContext} from '../contexts/UserContext';
+import users from '../MockData/Users'; //Temp
+
+
 
 async function Login(usuario, senha){
-  console.log('Marcador 1')
+  //console.log('Marcador 1')
   //let json = await Api.signIn(usuario,senha);
+  
   if ( usuario != '' && senha != ''){
-    if(json.token){
-      await AsyncStorage.setitem('token', json.token);
 
-      userDispatch({
-        type: 'setAvatar',
-        payload:{
-          avatar: json.data.avatar
-        }
-      });
+    if(u){
+
+      setUser(u)
 
       navigation.reset({routes:[{name:'Home'}]})
       
@@ -28,15 +27,18 @@ async function Login(usuario, senha){
   }
 }
 
+
 function SignIn({navigation}) {
   const {dispatch: userDispatch} = useContext(UserContext)
+  const [user, setUser] = useState(null);
   const [ usuario, setUsuario ] = useState('');
   const [ senha, setSenha ] = useState('');
   const [ logado, setLogado ] = useState(false)
   if (!logado){
     return (
       <View style = {styles.container}>
-        <Text>Login</Text>
+        <Image source={require('../assets/Clinica.jpg')} style={{width: 150, height:150, borderRadius:75, marginBottom:50}}/>
+        
         <TextInput 
             style={styles.input}
             placeholder='Usuário'
@@ -54,10 +56,10 @@ function SignIn({navigation}) {
           />
         <Button title='Login' onPress={()=>{Login(usuario, senha)}} />
         <Button title='home' onPress={() => navigation.navigate('MainTab')} />
+        <Button title='Admin' onPress={() => navigation.navigate('AdmHome')} />
       </View>
     );
   }
 }
 
 export default SignIn;
-
