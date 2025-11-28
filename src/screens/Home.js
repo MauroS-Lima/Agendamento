@@ -3,6 +3,9 @@ import {Text, View, ScrollView, TouchableOpacity} from 'react-native'
 
 import styles from '../styles';
 import Api from  '../Api';
+import Card from '../components/Card'
+
+const test = {data: '28 Dez', hora: '12:00', subject: 'disponivel'}
 
 const getSchedule = async() => {
   setLoading(true);
@@ -19,9 +22,9 @@ const getSchedule = async() => {
 const Section = ({subject, status, time }) =>{
   return(
     <View style={styles.scrollerTab}>
-      <Text>{time}</Text>
-      <Text>{subject}</Text>
-      <Text>{status}</Text>
+      <Text>{test.data}</Text>
+      <Text>{test.hora}</Text>
+      <Text>{test.subject}</Text>
     </View>
   )
 }
@@ -33,10 +36,11 @@ function Home({navigation}) {
 }, []);
 
   return(
-     <View style = {styles.container}>
+     <View contentContainerStyle = {styles.container}>
       <Text>Home</Text>
       <ScrollView style = {styles.scroller}>
-      {Section('subject', 'status', 'time')}
+      <Section time='time' subject ='subject' status = 'status'/>
+      <Card props= {test}/>
       </ScrollView>
      </View>
   );
