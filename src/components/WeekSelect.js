@@ -2,11 +2,6 @@ import { StyleSheet, Text, TouchableOpacity, ScrollView, View } from 'react-nati
 import React, { useState } from 'react';
 
 
-const users = [
-  { id: '1', username: 'patient1', password: '123', role: 'patient' },
-  { id: '2', username: 'therapist1', password: '123', role: 'therapist' },
-];
-
 const dayStr = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
 
 const setDisp = (therapistId, slots) => {
@@ -40,7 +35,7 @@ function WeekSelect() {
 
 
   return (
-    <View style={{ flex: 1, padding: 16 }}>
+    <ScrollView style={{ flex: 1, padding: 16 }}>
       <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 8 }}>
         Disponibilidade (Click para selecionar)
       </Text>
@@ -105,7 +100,7 @@ function WeekSelect() {
       
       
 
-    </View>
+    </ScrollView>
   );
 }
 
