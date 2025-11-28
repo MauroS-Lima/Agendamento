@@ -27,13 +27,14 @@ export default StyleSheet.create({
     backgroundColor: "#fff",
     padding:20,
     justifyContent: "center",
-    marginBottom: 30,
   },
   scrollerTab: {
     flex: 1,
-    backgroundColor: "#888",
+    backgroundColor: "#63c2d1",
     padding:20,
     justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 20,
   },
   header: {
     fontSize: 24,
@@ -41,8 +42,8 @@ export default StyleSheet.create({
     color:'#fff',
     justifyContent: "center",
   },
-  lista:{
+  /*lista:{
     marginTop: 30,
     marginBottom: 30,
-  },
+  },*/
 });
