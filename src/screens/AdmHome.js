@@ -2,13 +2,13 @@ import React from 'react';
 import {Text,View,Button} from 'react-native'
 
 import styles from '../styles';
-import WeekSelect from '../components/WeekSelect'
+import WeekView from '../components/WeekView'
 
 function AdmHome({navigation}) {
   return(
      <View style = {{flex:1}}>
       <Text>Admin</Text>
-      <WeekSelect/>
+      <WeekView/>
       <Button title='Logoff' onPress={() => navigation.navigate('Preload')} />
      </View>
   );
