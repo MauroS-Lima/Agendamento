@@ -42,8 +42,19 @@ export default StyleSheet.create({
     color:'#fff',
     justifyContent: "center",
   },
-  /*lista:{
-    marginTop: 30,
-    marginBottom: 30,
-  },*/
+  time: {
+    fontSize: 11, 
+    textAlign: 'center'
+  },
+  day: {
+    borderWidth: 1,
+    marginRight: 8,
+    padding: 4,
+    width: 60
+  },
+  toggle: {
+    marginVertical: 2,
+    padding: 3,
+    borderRadius: 4,
+  },
 });
