@@ -1,6 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity, ScrollView, View } from 'react-native';
 import React, { useState } from 'react';
 
+import styles from '../styles'
+import Selector from './Selector'
 
 const dayStr = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
 
@@ -16,23 +18,18 @@ const saveDisp = () => {
     Alert.alert('Disponibilidade atualizada');
   };
 
-function WeekSelect() {
-  const [SelectSlots, setSelectSlots] = useState([]);
-
-  const toggleSlot = (day, hour) => {
-    const exists = SelectSlots.some(
-      (s) => s.day === day && s.hour === hour
-    );
-    if (exists) {
-      setSelectSlots((s) =>
+function WeekView() {
+  const [Lista, setLista] = useState([]);
+  
+  const toggleSlot = (day, hour, active) => {
+    if (active) {
+      setLista((s) =>
         s.filter((slot) => !(slot.day === day && slot.hour === hour))
       );
     } else {
-      setSelectSlots((s) => [...s, { day, hour }]);
+      setLista((s) => [...s, { day, hour }]);
     }
   };
-
-
 
   return (
     <ScrollView style={{ flex: 1, padding: 16 }}>
@@ -42,40 +39,24 @@ function WeekSelect() {
 
       <ScrollView horizontal>
         <View style={{ flexDirection: 'row' }}>
-          {[...Array(7)].map((_, day) => (
+          {[...Array(7)].map((_, dia) => (
             <View
-              key={day}
-              style={{
-                borderWidth: 1,
-                marginRight: 8,
-                padding: 4,
-                width: 60,
-              }}
+              style={styles.day}
             >
               <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>
-                {dayStr[day]}
+                {dayStr[dia]}
               </Text>
-              {[...Array(11)].map((__, i) => {
-                const hour = 8 + i;
-                const selected = SelectSlots.some(
-                  (s) => s.day === day && s.hour === hour
+              {[...Array(14)].map((__, i) => {
+                const hora = 7 + i;
+                
+                const ativo = Lista.some(
+                  (s) => s.day === dia && s.hour === hora
                 );
+
                 return (
-                  <TouchableOpacity
-                    key={hour}
-                    onPress={() => toggleSlot(day, hour)}
-                    style={{
-                      marginVertical: 2,
-                      backgroundColor: selected ? 'green' : '#eee',
-                      padding: 3,
-                      borderRadius: 4,
-                    }}
-                  >
-                    <Text style={{ fontSize: 11, textAlign: 'center' }}>
-                      {hour}:00
-                    </Text>
-                  </TouchableOpacity>
+                  <Selector day={dia} hour= {hora} active={ativo} onToggle={toggleSlot}/>
                 );
+                
               })}
             </View>
           ))}
@@ -104,4 +85,5 @@ function WeekSelect() {
   );
 }
 
-export default WeekSelect;
+export default WeekView;
+
