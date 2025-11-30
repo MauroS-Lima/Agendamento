@@ -3,38 +3,38 @@ import React, { useState } from 'react';
 
 import styles from '../styles'
 import Selector from './Selector'
+import Schedule from '../MockData/Schedule'
 
 const dayStr = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
 
-const setDisp = (therapistId, slots) => {
-    setDisponibilidade((avail) => ({
-      ...avail,
-      [therapistId]: slots,
-    }));
+
+
+function WeekView({mode=false}) {
+  const [Lista, setLista] = useState(Schedule);
+
+  const saveDisp = () => {                                               //Testes
+
+  //  {console.log("foi", Lista)} 
   };
 
-const saveDisp = () => {
-    setDisp(user.id, SelectSlots);
-    Alert.alert('Disponibilidade atualizada');
-  };
-
-function WeekView() {
-  const [Lista, setLista] = useState([]);
-  
   const toggleSlot = (day, hour, active) => {
-    if (active) {
+    if (active==='Disponível') {
       setLista((s) =>
-        s.filter((slot) => !(slot.day === day && slot.hour === hour))
+        s.map((dia,i) => i === day ? dia.map(
+          (hora,j)=> j===hour ? hora.hour='Indisponível' : hora): dia) 
       );
-    } else {
-      setLista((s) => [...s, { day, hour }]);
+    } else if (active ==='Indisponível'){
+      setLista((s) => 
+        s.map((dia,i) => i === day ? dia.map(
+          (hora,j)=> j===hour ? hora.hour='Disponível' : hora): dia)
+      );
     }
   };
 
   return (
     <ScrollView style={{ flex: 1, padding: 16 }}>
       <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 8 }}>
-        Disponibilidade (Click para selecionar)
+        Programação semanal
       </Text>
 
       <ScrollView horizontal>
@@ -47,11 +47,10 @@ function WeekView() {
                 {dayStr[dia]}
               </Text>
               {[...Array(14)].map((__, i) => {
-                const hora = 7 + i;
-                
-                const ativo = Lista.some(
-                  (s) => s.day === dia && s.hour === hora
-                );
+                const hora = 0 + i;
+            
+                const ativo = Lista[dia][hora]
+                //console.log('erro', Lista)
 
                 return (
                   <Selector day={dia} hour= {hora} active={ativo} onToggle={toggleSlot}/>
