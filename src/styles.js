@@ -25,8 +25,9 @@ export default StyleSheet.create({
     flex: 1,
     marginTop: 20,
     backgroundColor: "#fff",
-    padding:20,
+    padding:10,
     justifyContent: "center",
+    
   },
   scrollerTab: {
     flex: 1,
@@ -50,7 +51,8 @@ export default StyleSheet.create({
     borderWidth: 1,
     marginRight: 8,
     padding: 4,
-    width: 60
+    width: 80,
+    
   },
   toggle: {
     marginVertical: 2,
