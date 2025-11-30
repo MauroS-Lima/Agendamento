@@ -32,12 +32,12 @@ function WeekView({mode=false}) {
   };
 
   return (
-    <ScrollView style={{ flex: 1, padding: 16 }}>
-      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 8 }}>
+    <ScrollView style={styles.scroller} >
+      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 8, textAlign: 'center' }}>
         Programação semanal
       </Text>
 
-      <ScrollView horizontal>
+      <ScrollView horizontal >
         <View style={{ flexDirection: 'row' }}>
           {[...Array(7)].map((_, dia) => (
             <View
@@ -85,4 +85,3 @@ function WeekView({mode=false}) {
 }
 
 export default WeekView;
-
