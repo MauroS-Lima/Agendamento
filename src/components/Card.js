@@ -4,16 +4,17 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 
 const Card = ({props}) => {
-  {props.subject === 'clear' }
+  const color =(props.subject==='Disponível' ? "rgba(126,211,33,1)" : props.subject==='Indisponível' ? '#eee' : 'red')
+  
   return (
     <View style={styles.container}>
       <View style={styles.bodyContent}>
         <Text style={styles.titleStyle}>{props.data}</Text>
         <Text style={styles.subtitleStyle}>{props.hora}</Text>
       </View>
-      <View style={styles.body}>
+      <View style={{padding: 8, backgroundColor: color, height: 30, alignItems: "stretch"}}>
         <Text style={styles.bodyText}>
-          Disponivel
+          {props.subject}
         </Text>
       </View>
       <View style={styles.actionBody}>
@@ -27,6 +28,7 @@ const Card = ({props}) => {
     </View>
   );
 }
+
 
 
 
@@ -46,44 +48,38 @@ const styles = StyleSheet.create({
     elevation: 3,
     overflow: "hidden",
     alignItems: "stretch",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    width: 230
+    
   },
   bodyContent: {
-    padding: 16,
-    paddingTop: 24,
+    padding: 15,
+    paddingTop: 20,
     justifyContent: "center",
-    height: 130,
-    alignItems: "center"
+    height: 70,
+    alignItems: "center",
   },
   titleStyle: {
     fontSize: 24,
     color: "#000",
-    paddingBottom: 12
+    paddingBottom: 6
   },
   subtitleStyle: {
     fontSize: 14,
     color: "#000",
     lineHeight: 16,
-    opacity: 0.5
-  },
-  body: {
-    padding: 16,
-    paddingTop: 8,
-    backgroundColor: "rgba(126,211,33,1)",
-    height: 33,
-    alignItems: "stretch",
-    
+    opacity: 0.5,
+    paddingBottom: 6
   },
   bodyText: {
-    lineHeight: 20,
-    fontSize: 14,
+    lineHeight: 14,
+    fontSize: 13,
     color: "#424242",
-    flexWrap: "wrap"
   },
   actionBody: {
     padding: 8,
     flexDirection: "row",
-    height: 82,
+    height: 60,
     backgroundColor: "rgba(74,144,226,1)",
     justifyContent: "space-around",
     alignItems: "center"
