@@ -1,13 +1,13 @@
 const users = [
-  {username: 'user1', name:'Ana', password: '123', role: 1, mocktoken: 'valido'},
-  {username: 'user2', name:'Beatriz', password: 'senha', role: 1, mocktoken: 'valido'},
-  {username: 'user3', name:'Carlos', password: 'abc', role: 0, mocktoken: 'valido'},
-  {username: 'user4', name:'Diego', password: 'senha', role: 0, mocktoken: 'valido'},
-  {username: 'user5', name:'Eduardo', password: 'senha', role: 0, mocktoken: 'valido'},
-  {username: 'user6', name:'Felipe', password: 'senha', role: 0, mocktoken: 'valido'},
-  {username: 'user7', name:'Gustavo', password: 'senha', role: 0, mocktoken: 'valido'},
-  {username: 'user8', name:'Heitor', password: 'senha', role: 0, mocktoken: 'valido'},
-  {username: 'user9', name:'Igor', password: 'senha', role: 0, mocktoken: 'valido'},
-  {username: 'user10', name:'João', password: 'senha', role: 0, mocktoken: 'valido'},];
+  {name:'Ana', password: '123', docName: 'Ana', token: 'valido'},
+  {name:'Beatriz', password: 'senha', docName: 'Beatriz', token: 'valido'},
+  {name:'Carlos', password: 'abc', docName: 'Ana', token: 'valido'},
+  {name:'Diego', password: 'senha', docName: 'Ana', token: 'valido'},
+  {name:'Eduardo', password: 'senha', docName: 'Beatriz', token: 'valido'},
+  {name:'Felipe', password: 'senha', docName: 'Ana', token: 'valido'},
+  {name:'Gustavo', password: 'senha', docName: 'Ana', token: 'valido'},
+  {name:'Heitor', password: 'senha', docName: 'Beatriz', token: 'valido'},
+  {name:'Igor', password: 'senha', docName: 'Ana', token: 'valido'},
+  {name:'João', password: 'senha', docName: 'Beatriz', token: 'valido'},];
 
   export default users;
