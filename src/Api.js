@@ -44,4 +44,5 @@ export default{
     const token = await AsyncStorage.getItem('token');
     const req = await fetch('${BASE_API}/schedule?token=${token}');
     const json = await req.json();
-    return json;
+    return json;}
+}

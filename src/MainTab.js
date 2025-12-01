@@ -1,7 +1,7 @@
 import React, {useContext}from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-
+import AsyncStorage from "@react-native-community/async-storage"
 
 import {UserContext} from './contexts/UserContext'
 
@@ -16,10 +16,11 @@ function MainTab({navigation}) {
   const{state=user} = useContext(UserContext);
   return(
     <Tab.Navigator screenOptions={{
-      tabBarStyle: { backgroundColor: "#4EADBE", height:60 },
+      tabBarStyle: { backgroundColor: "#fff", height:60 },
       tabBarInactiveTintColor:'#888',
       tabBarActiveTintColor:"#e77",
-       }}>
+       }} //initialRouteName="Profile"
+       >
 
       <Tab.Screen name='Home' component={Home} 
       options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="home" color={color} size={26} />)}} />
