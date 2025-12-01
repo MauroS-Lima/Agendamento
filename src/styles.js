@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-
+//backgroundColor: "#4EADBE",
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -17,25 +17,33 @@ export default StyleSheet.create({
     backgroundColor: "#fff",
 },
   logo: {
-    width: 100,
-    height: 90,
-    marginBottom: 20,
+    width: 150,
+    height:150,
+    borderRadius:75,
+    marginBottom:25
   },
   scroller: {
     flex: 1,
-    marginTop: 20,
+    backgroundColor: "#63c2d1",
+    padding:10,
+    justifyContent: "top",
+
+  },
+  scrollerCont: {
+    marginTop: 0,
     backgroundColor: "#fff",
     padding:10,
-    justifyContent: "center",
-    
+    alignItems: "center",
   },
   scrollerTab: {
-    flex: 1,
-    backgroundColor: "#63c2d1",
+    backgroundColor: "#4EADBE",
     padding:20,
     justifyContent: "center",
     borderRadius: 10,
     marginBottom: 20,
+    height: 90,
+    width: 150,
+    alignItems: "center",
   },
   header: {
     fontSize: 24,
@@ -52,11 +60,20 @@ export default StyleSheet.create({
     marginRight: 8,
     padding: 4,
     width: 80,
-    
   },
   toggle: {
     marginVertical: 2,
     padding: 3,
     borderRadius: 4,
+  },
+  profile: {
+    backgroundColor: "#fff",
+    padding:20,
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 20,
+    height: 90,
+    width: 150,
+    alignItems: "center",
   },
 });
