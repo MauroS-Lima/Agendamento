@@ -14,7 +14,7 @@ function WeekView({mode=false}) {
 
   const saveDisp = () => {                                               //Testes
 
-  //  {console.log("foi", Lista)} 
+  {console.log("foi", Lista)} 
   };
 
   const toggleSlot = (day, hour, active) => {
@@ -34,7 +34,7 @@ function WeekView({mode=false}) {
   return (
     <ScrollView style={styles.scroller} >
       <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 8, textAlign: 'center' }}>
-        Programação semanal
+        Selecionar disponibilidade
       </Text>
 
       <ScrollView horizontal >
