@@ -4,12 +4,12 @@
     "react-native-screens": "~4.11.1",
     "@react-navigation/stack": "*",
     "@react-navigation/native": "*",
+    "react-native-vector-icons": "10.3.0",
     "react-native-gesture-handler": "~2.24.0",
     "@react-navigation/bottom-tabs": "*",
     "@react-navigation/native-stack": "*",
     "react-native-safe-area-context": "5.4.0",
     "@react-native-community/async-storage": "*",
-    "react-native-vector-icons/MaterialCommunityIcons": "*",
-    "react-native-vector-icons": "10.3.0"
+    "react-native-vector-icons/MaterialCommunityIcons": "*"
   }
 }
