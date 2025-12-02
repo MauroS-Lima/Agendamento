@@ -76,4 +76,7 @@ export default StyleSheet.create({
     width: 150,
     alignItems: "center",
   },
+  logOff:{
+    
+  }
 });
