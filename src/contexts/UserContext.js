@@ -17,6 +17,7 @@ export default ({children}) => {
 const DataReducer = (data, action) => {
   switch(action.type) {
     case 'login': {
+
       return {...data,
         name: action.payload.name,
         doc: action.payload.doc,
@@ -30,6 +31,12 @@ const DataReducer = (data, action) => {
         doc: '',
         weekly: [],
         alterations: []
+      };
+    }
+    case 'weekly': {
+      console.log('recebido', action.payload.weekly)
+      return {...data,
+        alterations: [...data.weekly, action.payload.weekly]
       };
     }
     case 'reschedule': {
