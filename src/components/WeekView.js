@@ -1,24 +1,34 @@
 import { StyleSheet, Text, TouchableOpacity, ScrollView, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import styles from '../styles'
 import Selector from './Selector'
-import Schedule from '../MockData/Schedule'
+import { UserContext } from '../contexts/UserContext'
+//import Schedule from '../MockData/Schedule'
 
 const dayStr = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
 
+const saveDisp = async() => {                                               //Testes
+  const {dispatch: userDispatch}=useContext(UserContext)
+    userDispatch({type:'weekly', payload: {weekly: Lista} });
 
+    await AsyncStorage.setItem('name, Lista')
 
-function WeekView({mode=false}) {
-  const [Lista, setLista] = useState(Schedule);
-
-  const saveDisp = () => {                                               //Testes
-
-  {console.log("foi", Lista)} 
+    {console.log("foi", Lista)} 
   };
 
+function WeekView({mode=false}) {
+  const { data:user} = useContext(UserContext);
+  const {dispatch: userDispatch}=useContext(UserContext)
+  const name = user.name
+  const doc = user.doc
+  const weekly = user.weekly
+  console.log('weekly',Lista)
+  const alterations = user.alterations
+  const [Lista, setLista] = useState(weekly);
+
   const toggleSlot = (day, hour, active) => {
-    if (active==='Disponível') {
+    if (active==='Disponível') { 
       setLista((s) =>
         s.map((dia,i) => i === day ? dia.map(
           (hora,j)=> j===hour ? hora.hour='Indisponível' : hora): dia) 
@@ -32,13 +42,13 @@ function WeekView({mode=false}) {
   };
 
   return (
-    <ScrollView style={styles.scroller} >
+    <View style={styles.weekly} >
       <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 8, textAlign: 'center' }}>
         Selecionar disponibilidade
       </Text>
 
-      <ScrollView horizontal >
-        <View style={{ flexDirection: 'row' }}>
+      <ScrollView horizontal style={{alignItems: "left"}} >
+        <View style={{ flexDirection: 'row', alignItems: "left"}}>
           {[...Array(7)].map((_, dia) => (
             <View
               style={styles.day}
@@ -80,7 +90,7 @@ function WeekView({mode=false}) {
       
       
 
-    </ScrollView>
+    </View>
   );
 }
 
