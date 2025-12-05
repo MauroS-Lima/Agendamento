@@ -8,14 +8,7 @@ import { UserContext } from '../contexts/UserContext'
 
 const dayStr = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
 
-const saveDisp = async() => {                                               //Testes
-  const {dispatch: userDispatch}=useContext(UserContext)
-    userDispatch({type:'weekly', payload: {weekly: Lista} });
 
-    await AsyncStorage.setItem('name, Lista')
-
-    {console.log("foi", Lista)} 
-  };
 
 function WeekView({mode=false}) {
   const { data:user} = useContext(UserContext);
@@ -23,9 +16,17 @@ function WeekView({mode=false}) {
   const name = user.name
   const doc = user.doc
   const weekly = user.weekly
-  console.log('weekly',Lista)
+  console.log('weekly',weekly)
   const alterations = user.alterations
   const [Lista, setLista] = useState(weekly);
+
+  const saveDisp = async() => {                                               //Testes
+    userDispatch({type:'weekly', payload: {weekly: Lista} });
+
+    //await AsyncStorage.setItem('name, Lista')
+
+    {console.log("foi", Lista)} 
+  };
 
   const toggleSlot = (day, hour, active) => {
     if (active==='Disponível') { 
