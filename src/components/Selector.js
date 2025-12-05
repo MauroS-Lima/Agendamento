@@ -10,18 +10,20 @@ const Selector = ({day, hour, active, onToggle}) => {
     <TouchableOpacity
       onPress={() => onToggle(day, hour, active)}
       style={{
-        marginVertical: 2,
+        marginVertical: 1,
         backgroundColor: color,
         padding: 3,
         borderRadius: 10,
-        height:60,
+        height:30,
       }}
     >
     { hour < 6 ? <Text style={styles.time}>{hour+7}:30</Text>:<Text style={styles.time}>{hour+7}:00</Text>}
-    {active==='Disponível'||active==='Indisponível' ? <Text style={styles.time}>Status:</Text> : <Text style={styles.time}>Paciente:</Text>}
-    <Text style={styles.time}>{active}</Text>
+    
+    
     </TouchableOpacity>
   )
 }
 
 export default Selector;
+//<Text style={styles.time}>{active}</Text>
+ //{active==='Disponível'||active==='Indisponível' ? <Text style={styles.time}>Status:</Text> : <Text style={styles.time}>Paciente:</Text>}
