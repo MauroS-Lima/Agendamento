@@ -29,22 +29,19 @@ const DataReducer = (data, action) => {
       return {...data, 
         name: '',
         doc: '',
-        weekly: [],
-        alterations: []
       };
     }
     case 'weekly': {
-      console.log('recebido', action.payload.weekly)
       return {...data,
-        alterations: [...data.weekly, action.payload.weekly]
+        weekly:  action.payload.weekly
       };
     }
     case 'reschedule': {
       return {...data,
-        alterations: [...data.alterations, action.payload.alterations]
+        alterations: action.payload.alterations
       };
     }
-    case 'clearSchedule': {
+    case 'ScheduleRemove': {
       return {...data,
         alterations: data.alterations.filter(d => d !== action.payload.alterations)
       };
