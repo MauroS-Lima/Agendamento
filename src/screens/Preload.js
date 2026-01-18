@@ -24,7 +24,7 @@ function Preload({navigation}) {
           const user = await AsyncStorage.getItem('name');
           const docName = await AsyncStorage.getItem('docName');
 
-          const ScheduleData = await AsyncStorage.getItem(docName);
+          const ScheduleData = JSON.parse(await AsyncStorage.getItem(docName));
           console.log("result",ScheduleData)
           const docSchedule = (ScheduleData!=null) ? ScheduleData : Schedule;
 
