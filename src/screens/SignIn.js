@@ -30,8 +30,7 @@ function SignIn({navigation}) {
       await AsyncStorage.setItem('name', data[0].name)
       await AsyncStorage.setItem('docName', data[0].docName)
 
-      const ScheduleData = await AsyncStorage.getItem(data[0].docName);       //Internal schedule -> Api
-      console.log("result",ScheduleData)
+      const ScheduleData = JSON.parse(await AsyncStorage.getItem(data[0].docName));       //Internal schedule -> Api
       const docSchedule = (ScheduleData!=null) ? ScheduleData : Schedule;
 
       
