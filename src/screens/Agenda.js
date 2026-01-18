@@ -7,25 +7,14 @@ import Api from  '../Api';
 import Card from '../components/Card'
 import { UserContext } from '../contexts/UserContext'
 import WeekView from '../components/WeekView'
-import Weekly from '../components/Weekly'
 
 
 
 const test = {data: '28 Dez', hora: '12:00', subject: 'Disponível'}
 
-const Section = (data) =>{
-
-  return(
-    <View style={styles.scrollerTab}>
-      {data.doc===data.user?<Text>Psicologo(a) {data.user}</Text>:<Text>Psicologo(a){data.user}</Text>}
-      {data.doc=data.user?<Text></Text>:<Text>Psicologo(a): {data.user}</Text>}
-    </View>  
-  )
-} 
-
 //contentContainerStyle = {styles.scrollerCont}>
 
-function Home({navigation}) {
+function Agenda({navigation}) {
   const { data:user} = useContext(UserContext);
   const name = user.name
   const doc = user.doc
@@ -33,12 +22,11 @@ function Home({navigation}) {
   const alterations = user.alterations
   return(
       <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
-        <Section user={name} doc={doc}/>
-      {name===doc?<WeekView/>:<ScrollView horizontal><Card props= {test}/></ScrollView>}
+      {name===doc?<WeekView mode={1}/>:<ScrollView horizontal><Card props= {test}/></ScrollView>}
       
       </ScrollView>
   );
 }
 
-export default Home;
+export default Agenda;
 //<Section user={name} doc={doc}/>
