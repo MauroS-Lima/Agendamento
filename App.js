@@ -5,7 +5,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Preload from './src/screens/Preload';
 import SignIn from './src/screens/SignIn';
 import MainTab from './src/MainTab';
-import AdmHome from './src/screens/AdmHome';
 import UserContextProvider from './src/contexts/UserContext';
 
 const Stack = createStackNavigator()
@@ -20,7 +19,6 @@ function App() {
         <Stack.Screen name="Preload" component={Preload}/>
         <Stack.Screen name="SignIn" component={SignIn}/>
         <Stack.Screen name="MainTab" component={MainTab}/>
-        <Stack.Screen name="AdmHome" component={AdmHome}/>
         </Stack.Navigator>
       </NavigationContainer>
     </UserContextProvider>
