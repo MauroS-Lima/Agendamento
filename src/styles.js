@@ -25,26 +25,17 @@ export default StyleSheet.create({
   scroller: {
     flex: 1,
     backgroundColor: "#63c2d1",
-    padding:10,
     justifyContent: "top",
 
   },
   scrollerCont: {
-    marginTop: 0,
+    marginTop: 10,
     backgroundColor: "#63c2d1",
-    padding:10,
     alignItems: "center",
+    marginLeft: 20,
+
   },
-  scrollerTab: {
-    backgroundColor: "#fff",
-    padding:20,
-    justifyContent: "center",
-    borderRadius: 10,
-    marginBottom: 20,
-    height: 90,
-    width: 150,
-    alignItems: "center",
-  },
+
   header: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -57,7 +48,7 @@ export default StyleSheet.create({
   },
   day: {
     borderWidth: 1,
-    marginRight: 8,
+    marginRight: 2,
     padding: 4,
     width: 60,
     backgroundColor: "#fff"
@@ -80,7 +71,7 @@ export default StyleSheet.create({
   weekly: {
     marginTop: 20,
     backgroundColor: "#63c2d1",
-    padding:10,
+
     alignItems: "center",
   }
 });
