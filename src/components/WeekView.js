@@ -4,13 +4,16 @@ import React, { useState, useContext } from 'react';
 import styles from '../styles'
 import Selector from './Selector'
 import { UserContext } from '../contexts/UserContext'
+import AsyncStorage from "@react-native-community/async-storage"
+
 //import Schedule from '../MockData/Schedule'
 
 const dayStr = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
+const textStr = ['uma data disponivel para reagendar', 'um horario para o paciente', 'seus horarios de consulta'];
 
 
 
-function WeekView({mode=false}) {
+function WeekView({mode=0}) {
   const { data:user} = useContext(UserContext);
   const {dispatch: userDispatch}=useContext(UserContext)
   const name = user.name
@@ -23,10 +26,17 @@ function WeekView({mode=false}) {
   const saveDisp = async() => {                                               //Testes
     userDispatch({type:'weekly', payload: {weekly: Lista} });
 
-    //await AsyncStorage.setItem('name, Lista')
+    sending=JSON.stringify(Lista)
 
-    {console.log("foi", Lista)} 
+    console.log(sending)
+
+    AsyncStorage.setItem(name, sending)
+    console.log( AsyncStorage.getItem(name))
+
+    {console.log("foi", Lista)}
   };
+
+  const clearDisp = async() => { AsyncStorage.removeItem(name) };
 
   const toggleSlot = (day, hour, active) => {
     if (active==='Disponível') { 
@@ -44,17 +54,17 @@ function WeekView({mode=false}) {
 
   return (
     <View style={styles.weekly} >
-      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 8, textAlign: 'center' }}>
-        Selecionar disponibilidade
+      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 14, textAlign: 'center' }}>
+        Selecione {textStr[mode]}:
       </Text>
 
       <ScrollView horizontal style={{alignItems: "left"}} >
-        <View style={{ flexDirection: 'row', alignItems: "left"}}>
+        <View style={{ flexDirection: 'row', alignItems: "left", padding: 5, backgroundColor: "#0EADBE",}}>
           {[...Array(7)].map((_, dia) => (
             <View
               style={styles.day}
             >
-              <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>
+              <Text style={{ fontWeight: 'bold', textAlign: 'center', marginBottom: 5}}>
                 {dayStr[dia]}
               </Text>
               {[...Array(14)].map((__, i) => {
@@ -71,7 +81,7 @@ function WeekView({mode=false}) {
             </View>
           ))}
         </View>
-      </ScrollView>
+      </ScrollView> 
 
       <TouchableOpacity
         onPress={saveDisp}
@@ -87,8 +97,6 @@ function WeekView({mode=false}) {
           Salvar
         </Text>
       </TouchableOpacity>
-
-      
       
 
     </View>
