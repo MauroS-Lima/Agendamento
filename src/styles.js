@@ -31,12 +31,12 @@ export default StyleSheet.create({
   },
   scrollerCont: {
     marginTop: 0,
-    backgroundColor: "#fff",
+    backgroundColor: "#63c2d1",
     padding:10,
     alignItems: "center",
   },
   scrollerTab: {
-    backgroundColor: "#4EADBE",
+    backgroundColor: "#fff",
     padding:20,
     justifyContent: "center",
     borderRadius: 10,
@@ -59,7 +59,8 @@ export default StyleSheet.create({
     borderWidth: 1,
     marginRight: 8,
     padding: 4,
-    width: 80,
+    width: 60,
+    backgroundColor: "#fff"
   },
   toggle: {
     marginVertical: 2,
@@ -76,7 +77,11 @@ export default StyleSheet.create({
     width: 150,
     alignItems: "center",
   },
-  logOff:{
-    
+  weekly: {
+    marginTop: 20,
+    backgroundColor: "#63c2d1",
+    padding:10,
+    alignItems: "center",
   }
 });
+//backgroundColor: "#4EADBE",

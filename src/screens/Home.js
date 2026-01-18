@@ -7,13 +7,13 @@ import Api from  '../Api';
 import Card from '../components/Card'
 import { UserContext } from '../contexts/UserContext'
 import WeekView from '../components/WeekView'
+import Weekly from '../components/Weekly'
 
 
 
 const test = {data: '28 Dez', hora: '12:00', subject: 'Disponível'}
 
 const Section = (data) =>{
-  console.log('data', data) 
 
   return(
     <View style={styles.scrollerTab}>

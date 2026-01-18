@@ -17,6 +17,7 @@ export default ({children}) => {
 const DataReducer = (data, action) => {
   switch(action.type) {
     case 'login': {
+
       return {...data,
         name: action.payload.name,
         doc: action.payload.doc,
@@ -28,16 +29,19 @@ const DataReducer = (data, action) => {
       return {...data, 
         name: '',
         doc: '',
-        weekly: [],
-        alterations: []
+      };
+    }
+    case 'weekly': {
+      return {...data,
+        weekly:  action.payload.weekly
       };
     }
     case 'reschedule': {
       return {...data,
-        alterations: [...data.alterations, action.payload.alterations]
+        alterations: action.payload.alterations
       };
     }
-    case 'clearSchedule': {
+    case 'ScheduleRemove': {
       return {...data,
         alterations: data.alterations.filter(d => d !== action.payload.alterations)
       };

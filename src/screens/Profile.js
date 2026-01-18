@@ -12,15 +12,26 @@ function Profile({navigation}) {
     await AsyncStorage.multiRemove(['name', 'docName', 'token'])
     userDispatch({type: 'logoff'})
   }
-  const dados = async ()=>{
-    await AsyncStorage.multiGet(['name', 'docName'])
-  }
+  const { data:user} = useContext(UserContext);
+  const name = user.name
+  const doc = user.doc
+  //console.log('doc',doc)
+  
   return(
      <View style = {styles.container}>
      <View style = {styles.profile}>
-     <Text>Nome: </Text>
+      {doc===name?<Text>Psicologo(a) {name}</Text>:<Text>Psicologo(a){name}</Text>}
+      {doc===name?<Text></Text>:<Text>Psicologo(a): {name}</Text>}
+
      
-      <Button title='Logoff' color='red' onPress={() => logOff()} />
+      <TouchableOpacity onPress={()=>{logOff()}}
+        style={{
+          backgroundColor: 'red',
+          padding: 10,
+          marginTop: 12,
+          alignItems: 'center',
+          borderRadius: 6, }}>
+        <Text style={{ color: 'white', fontWeight: 'bold' }}>LOGOFF</Text></TouchableOpacity>
       </View>
      </View>
   );

@@ -1,8 +1,8 @@
-import { StyleSheet, Text, TouchableOpacity, ScrollView, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, ScrollView, View, Button } from 'react-native';
 import React, { useState, useContext } from 'react';
 
 import styles from '../styles'
-import Selector from './Selector'
+import Display from './Display'
 import { UserContext } from '../contexts/UserContext'
 //import Schedule from '../MockData/Schedule'
 
@@ -10,13 +10,12 @@ const dayStr = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
 
 
 
-function WeekView({mode=false}) {
+function Weekly({mode=false}) {
   const { data:user} = useContext(UserContext);
   const {dispatch: userDispatch}=useContext(UserContext)
   const name = user.name
   const doc = user.doc
   const weekly = user.weekly
-  console.log('weekly',weekly)
   const alterations = user.alterations
   const [Lista, setLista] = useState(weekly);
 
@@ -64,7 +63,7 @@ function WeekView({mode=false}) {
                 //console.log('erro', Lista)
 
                 return (
-                  <Selector day={dia} hour= {hora} active={ativo} onToggle={toggleSlot}/>
+                  <Display day={dia} hour= {hora} active={ativo} onToggle={toggleSlot}/>
                 );
                 
               })}
@@ -87,6 +86,7 @@ function WeekView({mode=false}) {
           Salvar
         </Text>
       </TouchableOpacity>
+      <Button title='Reset' onPress={() => resetDisp()} />
 
       
       
@@ -95,4 +95,4 @@ function WeekView({mode=false}) {
   );
 }
 
-export default WeekView;
+export default Weekly;
