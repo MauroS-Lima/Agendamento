@@ -20,8 +20,8 @@ function Profile({navigation}) {
   return(
      <View style = {styles.container}>
      <View style = {styles.profile}>
-      {doc===name?<Text>Psicologo(a) {name}</Text>:<Text>Psicologo(a){name}</Text>}
-      {doc===name?<Text></Text>:<Text>Psicologo(a): {name}</Text>}
+      {doc===name?<Text>Doutor(a) {name}</Text>:<Text>Usuario(a){name}</Text>}
+      {doc===name?<Text></Text>:<Text>Psicologo(a): {doc}</Text>}
 
      
       <TouchableOpacity onPress={()=>{logOff()}}
