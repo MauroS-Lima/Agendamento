@@ -16,13 +16,9 @@ const test = {data: '28 Dez', hora: '12:00', subject: 'Disponível'}
 
 function Agenda({navigation}) {
   const { data:user} = useContext(UserContext);
-  const name = user.name
-  const doc = user.doc
-  const weekly = user.weekly
-  const alterations = user.alterations
   return(
       <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
-      {name===doc?<WeekView mode={1}/>:<ScrollView horizontal><Card props= {test}/></ScrollView>}
+      {user.name===user.doc?<WeekView mode={1}/>:<ScrollView horizontal><Card props= {test}/></ScrollView>}
       
       </ScrollView>
   );
