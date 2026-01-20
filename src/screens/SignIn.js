@@ -18,6 +18,7 @@ function SignIn({navigation}) {
   const {dispatch: userDispatch}=useContext(UserContext)
   const [ usuario, setUsuario ] = useState('');
   const [ senha, setSenha ] = useState('');
+  //const pacientes = p.map((x) => x.name);
 
   const Login= async() =>{
   //let json = await Api.signIn(usuario,senha);
@@ -32,11 +33,17 @@ function SignIn({navigation}) {
 
       const ScheduleData = JSON.parse(await AsyncStorage.getItem(data[0].docName));       //Internal schedule -> Api
       const docSchedule = (ScheduleData!=null) ? ScheduleData : Schedule;
-
       
       const AlterationsData = await AsyncStorage.getItem('alterations');   //Internal reschedule -> Api
       const b = ['']
-      const alteration = (AlterationsData != null) ? AlterationsData : b;    
+      const alteration = (AlterationsData != null) ? AlterationsData : b;
+
+      const p = users.filter((u) => u.docName===data[0].name & u.docName !== u.name)
+      const clientes = p.map((x) => x.name)
+      await AsyncStorage.setItem('pacientes', JSON.stringify(clientes)) 
+      
+
+      
 
       
 
@@ -45,7 +52,7 @@ function SignIn({navigation}) {
 
       userDispatch({
         type:'login',
-        payload: {name: data[0].name, doc: data[0].docName, weekly: docSchedule, alterations: alteration}
+        payload: {name: data[0].name, doc: data[0].docName, weekly: docSchedule, alterations: alteration, pacientes: clientes }
       })
       
       navigation.reset({routes:[{name:'MainTab'}]})
