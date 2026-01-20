@@ -30,12 +30,15 @@ function Preload({navigation}) {
           
           const AlterationsData = await AsyncStorage.getItem('alterations');
           const b = ['']
-          const alteration = (AlterationsData != null) ? AlterationsData : b;  
+          const alteration = (AlterationsData != null) ? AlterationsData : b;
+
+          const clientes = JSON.parse(await AsyncStorage.getItem('pacientes'))
+
 
 
           userDispatch({ 
             type:'login',
-            payload: {name: user, doc: docName, weekly: docSchedule, alterations: alteration}
+            payload: {name: user, doc: docName, weekly: docSchedule, alterations: alteration, pacientes: clientes}
           })
 
           navigation.reset({routes:[{name:'MainTab'}]})
