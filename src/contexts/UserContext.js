@@ -22,7 +22,8 @@ const DataReducer = (data, action) => {
         name: action.payload.name,
         doc: action.payload.doc,
         weekly: action.payload.weekly,
-        alterations: action.payload.alterations
+        alterations: action.payload.alterations,
+        pacientes: action.payload.pacientes
       };
     }
     case 'logoff': {
@@ -57,5 +58,6 @@ const initialData = {
   name: '',
   doc: '',
   weekly: [],
-  alterations: []
+  alterations: [],
+  pacientes: []
 };
