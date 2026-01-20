@@ -1,10 +1,13 @@
-import { StyleSheet, Text, TouchableOpacity, ScrollView, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, ScrollView, View, Modal } from 'react-native';
 import React, { useState, useContext } from 'react';
+import AsyncStorage from "@react-native-community/async-storage"
 
 import styles from '../styles'
 import Selector from './Selector'
 import { UserContext } from '../contexts/UserContext'
-import AsyncStorage from "@react-native-community/async-storage"
+import Butao from './Butao'
+
+
 
 //import Schedule from '../MockData/Schedule'
 
@@ -16,44 +19,60 @@ const textStr = ['uma data disponivel para reagendar', 'um horario para o pacien
 function WeekView({mode=0}) {
   const { data:user} = useContext(UserContext);
   const {dispatch: userDispatch}=useContext(UserContext)
-  const name = user.name
-  const doc = user.doc
-  const weekly = user.weekly
-  console.log('weekly',weekly)
-  const alterations = user.alterations
-  const [Lista, setLista] = useState(weekly);
+  const text = (mode === 1) ? 'Selecione um paciente: ' : null;
 
-  const saveDisp = async() => {                                               //Testes
+  const [Pacientes, setPacientes] = useState(user.pacientes);
+  const [Paciente, setPaciente] = useState(user.pacientes[0]);
+  const [Lista, setLista] = useState(user.weekly);
+
+  const pacientesLivres = () => {setPacientes(Pacientes.filter((u) => Lista.some((x) => x.some((y) => y===u))))}
+
+  const saveDisp = async() => {
     userDispatch({type:'weekly', payload: {weekly: Lista} });
 
     sending=JSON.stringify(Lista)
 
-    console.log(sending)
+    AsyncStorage.setItem(user.name, sending)
 
-    AsyncStorage.setItem(name, sending)
-    console.log( AsyncStorage.getItem(name))
-
-    {console.log("foi", Lista)}
   };
 
-  const clearDisp = async() => { AsyncStorage.removeItem(name) };
+  //
 
-  const toggleSlot = (day, hour, active) => {
-    if (active==='Disponível') { 
+  const toggleSlot = (props) => {
+
+    if (props.active==='Disponível') { 
       setLista((s) =>
-        s.map((dia,i) => i === day ? dia.map(
-          (hora,j)=> j===hour ? hora.hour='Indisponível' : hora): dia) 
+        s.map((dia,i) => i === props.day ? dia.map(
+          (hora,j)=> j === props.hour ? hora.hour='Indisponível' : hora): dia) 
       );
-    } else if (active ==='Indisponível'){
+    } else if (props.active ==='Indisponível'){
       setLista((s) => 
-        s.map((dia,i) => i === day ? dia.map(
-          (hora,j)=> j===hour ? hora.hour='Disponível' : hora): dia)
+        s.map((dia,i) => i === props.day ? dia.map(
+          (hora,j)=> j === props.hour ? hora.hour='Disponível' : hora): dia)
       );
     }
   };
 
+  const pickSlot = (props) => {
+
+    if (props.active !== 'Indisponível') { 
+      console.log(props.paciente)
+      setLista((s) =>
+        s.map((dia,i) => i === props.day ? dia.map(
+          (hora,j)=> j=== props.hour ? hora.hour = props.paciente : hora): dia) 
+      );
+    }
+  };
+//
   return (
     <View style={styles.weekly} >
+
+      <Text style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>{text}</Text>
+
+      <ScrollView horizontal style={{ flexDirection: 'row', padding:5 }}>{Pacientes.map((a) => (
+        <Butao text={a} />
+        ))}</ScrollView>
+
       <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 14, textAlign: 'center' }}>
         Selecione {textStr[mode]}:
       </Text>
@@ -67,14 +86,15 @@ function WeekView({mode=0}) {
               <Text style={{ fontWeight: 'bold', textAlign: 'center', marginBottom: 5}}>
                 {dayStr[dia]}
               </Text>
-              {[...Array(14)].map((__, i) => {
+              {[...Array(14)].map((_, i) => {
                 const hora = 0 + i;
             
                 const ativo = Lista[dia][hora]
-                //console.log('erro', Lista)
+
+                const x = {day:dia, hour: hora, active:ativo, livre: Pacientes, onToggle: mode===2 ? toggleSlot : pickSlot}
 
                 return (
-                  <Selector day={dia} hour= {hora} active={ativo} onToggle={toggleSlot}/>
+                  <Selector prop={x}/> 
                 );
                 
               })}
@@ -104,3 +124,7 @@ function WeekView({mode=0}) {
 }
 
 export default WeekView;
+
+
+//  const clearDisp = async() => { AsyncStorage.removeItem(name) };
+
