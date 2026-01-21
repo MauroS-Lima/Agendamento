@@ -3,33 +3,40 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 
 
-const Card = ({props}) => {
-  const color =(props.subject==='Disponível' ? "rgba(126,211,33,1)" : props.subject==='Indisponível' ? '#eee' : 'red')
-  
+const Card = ({props, power}) => {
+  const color =(props.active==='Disponível' ? "rgba(126,211,33,1)" : props.active==='Indisponível' ? '#eee' : 'red')
+  const click = () => {
+      props.clear(props);
+      props.onToggle(props);
+      power(false);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.bodyContent}>
-        <Text style={styles.titleStyle}>{props.data}</Text>
-        <Text style={styles.subtitleStyle}>{props.hora}</Text>
+        <Text style={styles.titleStyle}>
+        {props.diaSem[props.day]} { props.hour < 6 ? <Text style={styles.time}>{props.hour+7}:30</Text>:<Text style={styles.time}>{props.hour+7}:00</Text>}
+        </Text>
+        <Text style={styles.subtitleStyle}>{props.active==='Disponível' ? null : 'Deseja substituir o paciente atual?'}</Text>
       </View>
       <View style={{padding: 8, backgroundColor: color, height: 30, alignItems: "stretch"}}>
-        <Text style={styles.bodyText}>
-          {props.subject}
+        <Text style={{lineHeight: 14,fontSize: 13, color: props.active==='Disponível' ? '#424242' : '#fff'}}>
+          {props.active==='Disponível' ? props.active : 'ocupado'}
         </Text>
       </View>
       <View style={styles.actionBody}>
-        <TouchableOpacity style={styles.actionButton1}>
+        <TouchableOpacity style={styles.actionButton1} onPress={() => power(false)}>
           <Text style={styles.actionText1}>Cancelar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton2}>
-          <Text style={styles.actionText2}>Remarcar</Text>
+        <TouchableOpacity style={styles.actionButton2} onPress={() => {if(props.type===1) { click() }} }>
+          <Text style={styles.actionText2}>Alterar</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
 
-
+//onPress={() => prop.onToggle(prop)}
 
 
 const styles = StyleSheet.create({
@@ -39,11 +46,13 @@ const styles = StyleSheet.create({
     borderColor: "rgba(155,155,155,1)",
     backgroundColor: "#FFF",
     shadowColor: "#000",
+    alignSelf: "center",
+    top: '35%',
     shadowOffset: {
-      width: -2,
-      height: 2
+      width: -5,
+      height: 5
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.5,
     shadowRadius: 1.5,
     elevation: 3,
     overflow: "hidden",
@@ -69,12 +78,7 @@ const styles = StyleSheet.create({
     color: "#000",
     lineHeight: 16,
     opacity: 0.5,
-    paddingBottom: 6
-  },
-  bodyText: {
-    lineHeight: 14,
-    fontSize: 13,
-    color: "#424242",
+    paddingBottom: 10
   },
   actionBody: {
     padding: 8,
