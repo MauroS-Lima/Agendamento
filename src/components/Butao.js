@@ -1,18 +1,20 @@
 import { Text, TouchableOpacity, View, Modal } from 'react-native';
-import React, { useState, useContext } from 'react';
 
 
-
-function Butao({color='blue', text='test', onClick=null}) {
+function Butao({color='blue', text='test', onClick=null, size=10, borda=0, teste}) {
+  //console.log(teste)
   return(
     <TouchableOpacity
         onPress={onClick}
         style={{
-          backgroundColor: 'blue',
-          padding: 10,
-          marginRight: 4,
+          backgroundColor: color,
+          padding: size,
+          margin: 2,
           alignItems: 'center',
-          borderRadius: 6,
+          justifyContent: 'center',
+          borderRadius: 8,
+          borderColor: '#fff',
+          borderWidth: borda,
         }}
       >
         <Text style={{ color: 'white', fontWeight: 'bold' }}>
