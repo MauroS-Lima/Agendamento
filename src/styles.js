@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-//backgroundColor: "#4EADBE",
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -69,11 +68,10 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   weekly: {
-    marginTop: 20,
+    marginTop: 10,
     backgroundColor: "#63c2d1",
-
+    marginBottom: 10,
     alignItems: "center",
   }
 });
 //backgroundColor: "#4EADBE",
-
