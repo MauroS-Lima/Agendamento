@@ -4,15 +4,13 @@ import React, { useState, useContext } from 'react';
 import styles from '../styles';
 import Card from './Card'
 
-const test = {data: '28 Dez', hora: '12:00', subject: 'Disponível'}
-
 const PSelector = ({prop}) => {
   //console.log(prop)    paciente 
   const [modal, setModal] = useState(false);
-  const color =(prop.active==='Disponível' ? 'green' : prop.active==='Indisponível' ? '#eee' : 'yellow')
+  const color =(prop.active==='Disponível' ? 'green' : prop.active==='Indisponível' ? '#eee' : 'dodgerblue')
   return (
     <View><TouchableOpacity
-      onPress={() => prop.onToggle(prop)}
+      onPress={() => { if( prop.active !== 'Indisponível' ){ setModal(true) } } }
       style={{
         marginVertical: 1,
         backgroundColor: color,
@@ -21,14 +19,14 @@ const PSelector = ({prop}) => {
         height:30,
         justifyContent: "center",
       }}
-    >
-    {active==='Disponível'||active==='Indisponível' ? <Text style={styles.time}>{active}</Text> : prop.hour < 6 ? <Text style={styles.time}>{prop.hour+7}:30</Text>:<Text style={styles.time}>{prop.hour+7}:00</Text>}
+    > 
+    {!(prop.active==='Disponível'||prop.active==='Indisponível') ? <Text style={styles.time}>{prop.active}</Text> : prop.hour < 6 ? <Text style={styles.time}>{prop.hour+7}:30</Text>:<Text style={styles.time}>{prop.hour+7}:00</Text>}
     
-    </TouchableOpacity><Modal transparent={true} visible={modal} onRequestClose={()=>{setModal(false)}}><Card props={test} /></Modal></View>
+    </TouchableOpacity><Modal transparent={true} visible={modal} onRequestClose={()=>{setModal(false)}}><Card props={prop} power={setModal} /></Modal></View>
   )
 }
 
 export default PSelector;
 //<Text style={styles.time}>{active}</Text>
-//{active==='Disponível'||active==='Indisponível' ? <Text style={styles.time}>Status:</Text> : <Text style={styles.time}>Paciente:</Text>}
+//prop.onToggle(prop)
 
