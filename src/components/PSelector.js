@@ -17,6 +17,7 @@ const PSelector = ({prop}) => {
         padding: 3,
         borderRadius: 10,
         height:30,
+        marginHorizontal: 4,
         justifyContent: "center",
       }}
     > 
@@ -29,4 +30,3 @@ const PSelector = ({prop}) => {
 export default PSelector;
 //<Text style={styles.time}>{active}</Text>
 //prop.onToggle(prop)
-
