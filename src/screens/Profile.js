@@ -21,7 +21,7 @@ function Profile({navigation}) {
   //console.log('doc',doc)
   
   return(
-    <View style = {styles.container}>
+    <View style = {styles.container1}>
       <View style = {styles.profile} >{doc===name?<Text>Doutor(a) {name}</Text>:<Text>Usuario(a){name}</Text>}</View>
       <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
       <SchedView/>
