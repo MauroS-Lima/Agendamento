@@ -23,11 +23,11 @@ function SignIn({navigation}) {
 
   const Login= async() =>{
 
-    const UserData = JSON.parse(await AsyncStorage.getItem('users'));
-    const Users = (UserData != null) ? UserData : users;
+    //const UserData = JSON.parse(await AsyncStorage.getItem('users'));
+    const Users = users;
 
     //let json = await Api.signIn(usuario,senha);
-
+    
     if ( usuario != '' && senha != ''){
       if(Users.some((u)=>u.name===usuario && u.password===senha)){ 
         const data = users.filter((u)=>u.name===usuario && u.password===senha)  //internal data -> Api
@@ -72,7 +72,7 @@ function SignIn({navigation}) {
 }
 
   return (
-    <View style = {styles.container}>
+    <View style = {styles.container1}>
       <Image source={require('../assets/Clinica.jpg')} style={{width: 150, height:150, borderRadius:75, marginBottom:50}}/>
         
       <TextInput 
@@ -91,10 +91,14 @@ function SignIn({navigation}) {
         secureTextEntry
       />
       <Butao text={'Login'} onClick={() => Login(usuario, senha)}/>
+      
+
     </View>
   );
 }
 //<Button title='home' onPress={() => navigation.navigate('MainTab')} />  debug
 //<Button title='Admin' onPress={() => navigation.navigate('AdmHome')} />   debug
-//<Butao text={'Login'} onClick={Login(usuario, senha)}>
+//<Butao text={'Login'} onClick={() = > await userStorage.clear();}>
+//<Butao text={'clear'} onClick={() => AsyncStorage.clear()}/>
+
 export default SignIn;
