@@ -1,9 +1,12 @@
 import React, {useContext} from 'react';
-import {Text,View,Button, TouchableOpacity} from 'react-native'
-import styles from '../styles';
+import {Text,View, ScrollView} from 'react-native'
 import AsyncStorage from "@react-native-community/async-storage"
 
 import {UserContext} from '../contexts/UserContext';
+import styles from '../styles';
+import Butao from '../components/Butao';
+import WeekView from '../components/WeekView'
+import SchedView from '../components/SchedView'
 
 function Profile({navigation}) {
   const {dispatch: userDispatch} = useContext(UserContext)
@@ -18,25 +21,18 @@ function Profile({navigation}) {
   //console.log('doc',doc)
   
   return(
-     <View style = {styles.container}>
-     <View style = {styles.profile}>
-      {doc===name?<Text>Doutor(a) {name}</Text>:<Text>Usuario(a){name}</Text>}
+    <View style = {styles.container}>
+      <View style = {styles.profile} >{doc===name?<Text>Doutor(a) {name}</Text>:<Text>Usuario(a){name}</Text>}</View>
+      <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
+      <SchedView/>
+      
+      </ScrollView>
       {doc===name?<Text></Text>:<Text>Psicologo(a): {doc}</Text>}
-
-     
-      <TouchableOpacity onPress={()=>{logOff()}}
-        style={{
-          backgroundColor: 'red',
-          padding: 10,
-          marginTop: 12,
-          alignItems: 'center',
-          borderRadius: 6, }}>
-        <Text style={{ color: 'white', fontWeight: 'bold' }}>LOGOFF</Text></TouchableOpacity>
-      </View>
-     </View>
+      <Butao text={'LOGOFF'} margen={20} color={'red'} onClick={() => logOff()}/>
+    </View>
   );
 }
-
+//<Butao text={'LOGOFF'} color={'red'} onClick={logOff()}/>
 export default Profile;
 //{dados[0][1]===dados[1][1]?<Text>Psicologo(a)</Text>:<Text>Psicologo(a): {dados[1][1]}</Text>}
 //multiRemove(['name', 'docName', 'token'])
