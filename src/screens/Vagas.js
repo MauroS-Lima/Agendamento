@@ -20,8 +20,7 @@ function Vagas({navigation}) {
 
   return(
       <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
-      {user.name===user.doc?<WeekView mode={2}/>:<ScrollView horizontal><Card props= {test}/></ScrollView>}
-      
+      <WeekView mode={2}/>
       </ScrollView>
   );
 }
