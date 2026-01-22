@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, View, Modal } from 'react-native';
 
 
-function Butao({color='blue', text='test', onClick=null, size=10, borda=0, teste}) {
+function Butao({color='blue', text='test', onClick=null, size=10, borda=0, margen=2 }) {
   //console.log(teste)
   return(
     <TouchableOpacity
@@ -9,7 +9,7 @@ function Butao({color='blue', text='test', onClick=null, size=10, borda=0, teste
         style={{
           backgroundColor: color,
           padding: size,
-          margin: 2,
+          margin: margen,
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: 8,
