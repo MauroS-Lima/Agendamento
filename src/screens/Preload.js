@@ -56,7 +56,7 @@ function Preload({navigation}) {
 
 
   return (
-    <View style = {styles.container}>
+    <View style = {styles.container1}>
       <Image source={require('../assets/Clinica.jpg')} style={{width: 150, height:150, borderRadius:75, marginBottom:25}}/>
       <Text>Carregando...</Text>
       <ActivityIndicator size='large' color= '#fff'/>
