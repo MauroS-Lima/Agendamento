@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 export default StyleSheet.create({
-  container: {
+  container1: {
     flex: 1,
     backgroundColor: "#63c2d1",
     alignItems: "center",
@@ -31,15 +31,22 @@ export default StyleSheet.create({
     marginTop: 10,
     backgroundColor: "#63c2d1",
     alignItems: "center",
-    marginLeft: 20,
+    marginLeft: 5,
 
   },
 
   header: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: 'bold',
-    color:'#fff',
-    justifyContent: "center",
+    textAlign: 'center',
+    marginBottom: 14,
+    
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 5,
+    marginRight: 5,
   },
   time: {
     fontSize: 11, 
@@ -48,7 +55,6 @@ export default StyleSheet.create({
   day: {
     borderWidth: 1,
     marginRight: 2,
-    padding: 4,
     width: 60,
     backgroundColor: "#fff"
   },
@@ -62,9 +68,7 @@ export default StyleSheet.create({
     padding:20,
     justifyContent: "center",
     borderRadius: 10,
-    marginBottom: 20,
-    height: 90,
-    width: 150,
+    marginTop: 20,
     alignItems: "center",
   },
   weekly: {
