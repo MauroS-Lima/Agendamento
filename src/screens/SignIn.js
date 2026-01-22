@@ -8,6 +8,7 @@ import Api from '../Api';
 import {UserContext} from '../contexts/UserContext';
 import users from '../MockData/Users'; //Temp
 import Schedule from '../MockData/Schedule'; //Temp
+import Butao from '../components/Butao'
 
 
 
@@ -21,26 +22,30 @@ function SignIn({navigation}) {
   //const pacientes = p.map((x) => x.name);
 
   const Login= async() =>{
-  //let json = await Api.signIn(usuario,senha);
 
-  if ( usuario != '' && senha != ''){
-    if(users.some((u)=>u.name===usuario && u.password===senha)){ 
-      const data = users.filter((u)=>u.name===usuario && u.password===senha)  //internal data -> Api
+    const UserData = JSON.parse(await AsyncStorage.getItem('users'));
+    const Users = (UserData != null) ? UserData : users;
 
-      await AsyncStorage.setItem('token', data[0].token)
-      await AsyncStorage.setItem('name', data[0].name)
-      await AsyncStorage.setItem('docName', data[0].docName)
+    //let json = await Api.signIn(usuario,senha);
 
-      const ScheduleData = JSON.parse(await AsyncStorage.getItem(data[0].docName));       //Internal schedule -> Api
-      const docSchedule = (ScheduleData!=null) ? ScheduleData : Schedule;
+    if ( usuario != '' && senha != ''){
+      if(Users.some((u)=>u.name===usuario && u.password===senha)){ 
+        const data = users.filter((u)=>u.name===usuario && u.password===senha)  //internal data -> Api
+
+        await AsyncStorage.setItem('token', data[0].token)
+        await AsyncStorage.setItem('name', data[0].name)
+        await AsyncStorage.setItem('docName', data[0].docName)
+
+        const ScheduleData = JSON.parse(await AsyncStorage.getItem(data[0].docName));       //Internal schedule -> Api
+        const docSchedule = (ScheduleData!=null) ? ScheduleData : Schedule;
       
-      const AlterationsData = await AsyncStorage.getItem('alterations');   //Internal reschedule -> Api
-      const b = ['']
-      const alteration = (AlterationsData != null) ? AlterationsData : b;
+        const AlterationsData = JSON.parse(await AsyncStorage.getItem('alterations'));   //Internal reschedule -> Api
+        const b = ['']
+        const alteration = (AlterationsData != null) ? AlterationsData : b;
 
-      const p = users.filter((u) => u.docName===data[0].name & u.docName !== u.name)
-      const clientes = p.map((x) => x.name)
-      await AsyncStorage.setItem('pacientes', JSON.stringify(clientes)) 
+        const p = Users.filter((u) => u.docName===data[0].name & u.docName !== u.name)
+        const clientes = p.map((x) => x.name)
+        await AsyncStorage.setItem('pacientes', JSON.stringify(clientes)) 
       
 
       
@@ -52,7 +57,7 @@ function SignIn({navigation}) {
 
       userDispatch({
         type:'login',
-        payload: {name: data[0].name, doc: data[0].docName, weekly: docSchedule, alterations: alteration, pacientes: clientes }
+        payload: {name: data[0].name, doc: data[0].docName, weekly: docSchedule, alterations: alteration, pacientes: clientes, users: Users }
       })
       
       navigation.reset({routes:[{name:'MainTab'}]})
@@ -85,10 +90,11 @@ function SignIn({navigation}) {
         onChangeText={setSenha}
         secureTextEntry
       />
-      <Button title='Login' onPress={()=>{Login(usuario, senha)}} />
+      <Butao text={'Login'} onClick={() => Login(usuario, senha)}/>
     </View>
   );
 }
 //<Button title='home' onPress={() => navigation.navigate('MainTab')} />  debug
 //<Button title='Admin' onPress={() => navigation.navigate('AdmHome')} />   debug
+//<Butao text={'Login'} onClick={Login(usuario, senha)}>
 export default SignIn;
