@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import AsyncStorage from "@react-native-community/async-storage"
 
 import styles from '../styles'
+import Display from './Display'
 import Selector from './Selector'
 import PSelector from './PSelector'
 import { UserContext } from '../contexts/UserContext'
@@ -10,12 +11,13 @@ import Butao from './Butao'
 import Schedule from '../MockData/Schedule'
 
 const dayStr = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
-const textStr = ['uma data disponivel para reagendar', 'um horario para o paciente', 'seus horarios de consulta'];
+const textStr = ['Cronograma da semana', 'Selecione um horario para o paciente', 
+'Selecione seus horarios de consulta', 'Selecione uma data disponivel para reagendar'];
 
 
 
 function WeekView({mode=0}) {
-  const { data:user} = useContext(UserContext);
+  const { data: user } = useContext(UserContext);
   const { dispatch: userDispatch } = useContext(UserContext);
   const text = (mode === 1) ? 'Selecione um paciente: ' : null;
 
@@ -88,7 +90,7 @@ function WeekView({mode=0}) {
         ))}</ScrollView> : <Text></Text>}
 
       <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 14, textAlign: 'center' }}>
-        Selecione {textStr[mode]}:
+        {textStr[mode]}:
       </Text>
 
       <ScrollView horizontal style={{alignItems: "left"}} >
@@ -105,17 +107,21 @@ function WeekView({mode=0}) {
             
                 const ativo = Lista[dia][hora]
                 
-                const x = {day:dia, hour: hora, active:ativo, livre: user.pacientes, paciente: Paciente, diaSem: dayStr, type: mode,
+                const x = {day:dia, hour: hora, active: ativo, paciente: Paciente, diaSem: dayStr, type: mode,
                 clear: clearSlot, onToggle: mode===2 ? toggleSlot : pickSlot
-                }
+                }  
 
                 switch(mode){
+                  case 3:{
+                    return(<Display prop={x}/>)
+                  }
                   case 2:{
                     return(<Selector prop={x}/>)
                   }
                   case 1:{
                     return(<PSelector prop={x}/>)
                   }
+                  default: return(<Display prop={x}/>)
                 }
                 
               })}
@@ -124,11 +130,10 @@ function WeekView({mode=0}) {
         </View>
       </ScrollView> 
 
-      <View style={{flexDirection: 'row'}}><Butao text={'Salvar'} onClick={saveDisp}/> 
+      { mode !== 0 ? <View style={{flexDirection: 'row'}}><Butao text={'Salvar'} onClick={saveDisp}/> 
       <Butao text={'Limpar'} color = {'red'} onClick={() => {if(mode===1){
         user.pacientes.map((a) => {clearSlot({ paciente: a })})
-        }else{clearDisp()}}}/></View>
-
+        }else{clearDisp()}}}/></View> : <Text></Text>}
     </View>
   );
 }
