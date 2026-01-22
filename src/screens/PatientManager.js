@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {Text, View, Button, TextInput, Image} from 'react-native'
+import { Text, View, ScrollView, TextInput, Modal } from 'react-native'
 import AsyncStorage from "@react-native-community/async-storage"
 import useNavigation from '@react-navigation/native'
 
@@ -13,23 +13,32 @@ function Manager({navigation}) {
   const {dispatch: userDispatch}=useContext(UserContext)
   const { data: user } = useContext(UserContext);
   
-  const p = user.users.filter((u) => u.name===u.docName )
-  const docs = p.map((x) => x.name)
+  const d = user.users.filter((u) => u.name === u.docName )
+  const docs = d.map((x) => x.name)
 
-  const [ usuario, setUsuario ] = useState('');
+  const p = user.users.filter((u) => u.name !== u.docName )
+  const pacs = p.map((x) => x.name)
+
+  const [ nome, setNome ] = useState('');
   const [ senha, setSenha ] = useState('');
   const [ psy, setPsy ] = useState(docs[0]);
+  const [ usuario, setUsuario ] = useState(pacs[0]);
+  const [ modal, setModal ] = useState(false);
 
-  const LoginCreate= async() =>{
+  const LoginCreate = async() => {
 
     //let json = await Api.logInCreate(usuario,senha,psy);
 
-    if ( usuario != '' && senha != '' && psy != ''){
-      if( ! user.users.some((u) => u.name===usuario ) ){ 
+    if ( nome != '' && senha != '' && psy != ''){
+      if( ! user.users.some((u) => u.name===nome ) ){ 
         userDispatch({
           type:'addUser',
-          payload: { name: usuario, password: senha, docName: psy, token: 'valido' }
+          payload: { name: nome, password: senha, docName: psy, token: 'valido' }
         })
+        setNome('')
+        setSenha('')
+        setPsy(docs[0])
+        alert('Usuario adicionado!')
 
     }else{alert('Usuario já existente!');}
   }else {
@@ -37,26 +46,47 @@ function Manager({navigation}) {
   }
 }
 
+const loginDelete = async() => {
+  userDispatch({
+          type:'removeUser',
+          payload: { name: usuario }
+        })
+}
+
   return (
-    <View style = {styles.container}>
-      <Image source={require('../assets/Clinica.jpg')} style={{width: 150, height:150, borderRadius:75, marginBottom:50}}/>
-        
-      <TextInput 
-        style={styles.input}
-        placeholder='Usuário'
-        placeholderTextColor= '#888'
-        value={usuario}
-        onChangeText={setUsuario}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder='Senha'
-        placeholderTextColor= '#888'
-        value={senha}
-        onChangeText={setSenha}
-        secureTextEntry
-      />
-      <Butao text={'Login'} onClick={() => LoginCreate(usuario, senha)}/>
+    <View style = {{flex: 1, backgroundColor: "#63c2d1"}}>
+      <View style = {{ alignItems: "center", justifyContent: "center", marginTop: 20 }}>
+        <Text style={styles.header}>Adicionar usuário:</Text>
+      
+        <ScrollView horizontal style={{ flexDirection: 'row', padding :5, }}> <Text style={styles.text}>Psicólogo(a): </Text> 
+        {docs.map((a) => ( <Butao text={a} onClick={() => setPsy(a)} color={ a===psy ? 'blue' : '#888' } size={6} /> ))} 
+        </ScrollView>
+
+        <TextInput 
+          style={styles.input}
+         placeholder='nome'
+          placeholderTextColor= '#888'
+          value={nome}
+          onChangeText={setNome}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Senha'
+          placeholderTextColor= '#888'
+          value={senha}
+          onChangeText={setSenha}
+          secureTextEntry
+        />
+        <Butao text={'Adicionar'} onClick={() => LoginCreate()}/>
+      </View>
+    <View style = {{ alignItems: "center", justifyContent: "center", marginTop: 20 }}>
+        <Text style={styles.header}>Remover usuário:</Text>
+        <ScrollView horizontal style={{ flexDirection: 'row', padding :5, marginBottom: 10 }}> x 
+        {pacs.map((a) => ( <Butao text={a} onClick={() => setUsuario(a)} color={ a === usuario ? 'black' : 'grey' } size={6} /> ))} 
+        </ScrollView>
+
+        <Butao text={'Excluir'} color='red' onClick={() => loginDelete() }/>
+      </View>
     </View>
   );
 }
