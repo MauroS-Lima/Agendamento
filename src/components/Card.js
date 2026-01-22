@@ -19,7 +19,7 @@ const Card = ({props, power}) => {
         </Text>
         <Text style={styles.subtitleStyle}>{props.active==='Disponível' ? null : 'Deseja substituir o paciente atual?'}</Text>
       </View>
-      <View style={{padding: 8, backgroundColor: color, height: 30, alignItems: "stretch"}}>
+      <View style={{padding: 8, backgroundColor: color, height: '20%', alignItems: "stretch"}}>
         <Text style={{lineHeight: 14,fontSize: 13, color: props.active==='Disponível' ? '#424242' : '#fff'}}>
           {props.active==='Disponível' ? props.active : 'ocupado'}
         </Text>
@@ -58,20 +58,23 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     alignItems: "stretch",
     justifyContent: "flex-end",
-    width: 230
+    width: '60%',
+    height: '20%'
     
   },
   bodyContent: {
     padding: 15,
     paddingTop: 20,
     justifyContent: "center",
-    height: 70,
+    height: '60%',
     alignItems: "center",
   },
   titleStyle: {
     fontSize: 24,
     color: "#000",
-    paddingBottom: 6
+    paddingtop: 6,
+    alignItems: "center",
+    justifyContent: "center",
   },
   subtitleStyle: {
     fontSize: 14,
@@ -90,7 +93,6 @@ const styles = StyleSheet.create({
   },
   actionButton1: {
     padding: 8,
-    height: 36,
     backgroundColor: "#fff",
     borderRadius: 20
   },
@@ -101,7 +103,6 @@ const styles = StyleSheet.create({
   },
   actionButton2: {
     padding: 8,
-    height: 36,
     borderRadius: 20,
     backgroundColor: "#fff"
   },
