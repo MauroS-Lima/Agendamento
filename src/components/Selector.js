@@ -8,12 +8,13 @@ const test = {data: '28 Dez', hora: '12:00', subject: 'Disponível'}
 
 const Selector = ({prop}) => {
   //console.log(prop)
-  const color =(prop.active==='Disponível' ? 'green' : prop.active==='Indisponível' ? '#eee' : 'red')
+  const color =(prop.active==='Disponível' ? 'green' : prop.active==='Indisponível' ? '#eee' : 'firebrick')
   return (
     <View><TouchableOpacity
       onPress={() => prop.onToggle(prop)}
       style={{
         marginVertical: 1,
+        marginHorizontal: 4,
         backgroundColor: color,
         padding: 3,
         borderRadius: 10,
