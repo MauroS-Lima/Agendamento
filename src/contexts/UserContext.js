@@ -24,7 +24,7 @@ const DataReducer = (data, action) => {
         weekly: action.payload.weekly,
         alterations: action.payload.alterations,
         pacientes: action.payload.pacientes,
-        users: action.payload.pacientes
+        users: action.payload.users
       };
     }
     case 'logoff': {
@@ -50,6 +50,9 @@ const DataReducer = (data, action) => {
     }
 
     case 'addUser': {
+      console.log(data.users)
+      console.log(action.payload.users)
+      console.log(data.users.push(action.payload.users))
       return {...data,
         users: data.users.push(action.payload.users)
       };
