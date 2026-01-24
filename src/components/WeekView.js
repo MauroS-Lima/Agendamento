@@ -19,7 +19,7 @@ const textStr = ['Cronograma da semana', 'Selecione um horario para o paciente',
 function WeekView({mode=0}) {
   const { data: user } = useContext(UserContext);
   const { dispatch: userDispatch } = useContext(UserContext);
-  const text = (mode === 1) ? 'Selecione um paciente: ' : null;
+  const text = 'Selecione um paciente: '
 
   const [Paciente, setPaciente] = useState(user.pacientes[0]);
   const [Lista, setLista] = useState(user.weekly);
@@ -82,18 +82,16 @@ function WeekView({mode=0}) {
   return (
     <View style={styles.weekly} >
 
-      <Text style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>{text}</Text>
-
-      {mode === 1 ? <ScrollView horizontal style={{ flexDirection: 'row', padding:5 }}>{user.pacientes.map((a) => (
-        <Butao text={a} onClick={() => setPaciente(a)} borda={ a===Paciente ? 2 : 0 } size={6} 
+      {mode === 1 ? <View><Text style={styles.header}>{text}</Text><ScrollView horizontal style={{ flexDirection: 'row', padding:5 }}>{user.pacientes.map((a) => (
+        <Butao text={a} top={14} onClick={() => setPaciente(a)} borda={ a===Paciente ? 2 : 0 } size={6} 
         color={ Lista.some((x) => x.some((y) =>  y === a ) ) ? 'dodgerblue' : '#888' }/> 
-        ))}</ScrollView> : <Text></Text>}
+        ))} </ScrollView></View> : <Text></Text>}
 
-      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 14, textAlign: 'center' }}>
+      <Text style={styles.header}>
         {textStr[mode]}:
       </Text>
 
-      <ScrollView horizontal style={{alignItems: "left"}} >
+      <ScrollView horizontal style={{alignItems: "left", marginTop: 14}} >
         <View style={{ flexDirection: 'row', alignItems: "left", padding: 5, marginBottom: 10, backgroundColor: "#0EADBE",}}>
           {[...Array(7)].map((_, dia) => (
             <View
@@ -142,4 +140,3 @@ export default WeekView;
 
 //<Butao text={'Salvar'} color = {'red'} onClick={() => {user.pacientes.map((a) => {clearSlot({ paciente: a })})}}/> 
 //  const clearDisp = async() => { AsyncStorage.removeItem(name) };
-
