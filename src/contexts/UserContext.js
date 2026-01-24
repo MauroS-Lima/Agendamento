@@ -39,9 +39,7 @@ const DataReducer = (data, action) => {
       };
     }
     case 'reschedule': {
-      return {...data,
-        alterations: data.alterations.push(action.payload.alterations)
-      };
+      return {...data, alterations: [...data.alterations, action.payload]};
     }
     case 'scheduleRemove': {
       return {...data,
@@ -50,18 +48,14 @@ const DataReducer = (data, action) => {
     }
 
     case 'addUser': {
-      console.log(data.users)
-      console.log(action.payload.users)
-      console.log(data.users.push(action.payload.users))
-      return {...data,
-        users: data.users.push(action.payload.users)
-      };
+      return {...data, users: action.payload} 
     }
 
     case 'removeUser': {
-      return {...data,
-        users: data.users.filter(d => d.name !== action.payload.users)
-      };
+      console.log('data1', data.users)
+      console.log('action1', action.payload.name)
+      console.log(data.users.filter(d => d.name !== action.payload.name))
+      return {...data, users: data.users.filter(d => d.name !== action.payload.name)};
     }
     
     default:
