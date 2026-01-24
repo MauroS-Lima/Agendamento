@@ -16,18 +16,15 @@ function Profile({navigation}) {
     userDispatch({type: 'logoff'})
   }
   const { data:user} = useContext(UserContext);
-  const name = user.name
-  const doc = user.doc
-  //console.log('doc',doc)
   
   return(
     <View style = {styles.container1}>
-      <View style = {styles.profile} >{doc===name?<Text>Doutor(a) {name}</Text>:<Text>Usuario(a){name}</Text>}</View>
+      <View style = {styles.profile} >{user.doc===user.name?<Text>Doutor(a) {user.name}</Text>:<Text>Usuario(a){user.name}</Text>}</View>
       <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
       <SchedView/>
       
       </ScrollView>
-      {doc===name?<Text></Text>:<Text>Psicologo(a): {doc}</Text>}
+      {user.doc===user.name?<Text></Text>:<Text>Psicologo(a): {user.doc}</Text>}
       <Butao text={'LOGOFF'} margen={20} color={'red'} onClick={() => logOff()}/>
     </View>
   );
