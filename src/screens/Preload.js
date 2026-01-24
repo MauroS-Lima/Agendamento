@@ -22,7 +22,7 @@ function Preload({navigation}) {
         //if(res.token){
          // await AsyncStorage.setitem('token', res.token);     Token refresh
         if(token==='valido'){        //Temp validation
-         
+
           const user = await AsyncStorage.getItem('name');
           const docName = await AsyncStorage.getItem('docName');
 
@@ -30,13 +30,14 @@ function Preload({navigation}) {
           const docSchedule = (ScheduleData!=null) ? ScheduleData : Schedule;
 
           const UserData = JSON.parse(await AsyncStorage.getItem('users'));
-          const Users = (UserData != null) ? UserData : users;
+          const Users = (UserData != null) ? UserData : users;  
+
          
           const AlterationsData = JSON.parse(await AsyncStorage.getItem('alterations'));
           const b = ['']
           const alteration = (AlterationsData != null) ? AlterationsData : b;
 
-          const clientes = JSON.parse(await AsyncStorage.getItem('pacientes'))
+          const clientes = JSON.parse(await AsyncStorage.getItem('pacientes')) 
 
 
           userDispatch({ 
