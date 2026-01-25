@@ -19,13 +19,13 @@ function Profile({navigation}) {
   
   return(
     <View style = {styles.container1}>
-      <View style = {styles.profile} >{user.doc===user.name?<Text>Doutor(a) {user.name}</Text>:<Text>Usuario(a){user.name}</Text>}</View>
-      <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
-      <SchedView/>
+      <View style = {styles.profile} >{user.doc===user.name?<Text>Doutor(a) {user.name}</Text>:<Text>Usuario(a){user.name}</Text>}
+      {user.doc===user.name?<Text></Text>:<Text>Psicologo(a): {user.doc}</Text>}</View>
       
+      <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
+        <SchedView/>      
       </ScrollView>
-      {user.doc===user.name?<Text></Text>:<Text>Psicologo(a): {user.doc}</Text>}
-      <Butao text={'LOGOFF'} margen={20} color={'red'} onClick={() => logOff()}/>
+      <Butao text={'Logoff'} margen={15} color={'red'} onClick={() => logOff()}/>
     </View>
   );
 }
