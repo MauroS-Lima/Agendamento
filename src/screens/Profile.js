@@ -19,7 +19,7 @@ function Profile({navigation}) {
   
   return(
     <View style = {styles.container1}>
-      <View style = {styles.profile} >{user.doc===user.name?<Text>Doutor(a) {user.name}</Text>:<Text>Usuario(a){user.name}</Text>}
+      <View style = {styles.profile} >{user.doc===user.name?<Text>Doutor(a) {user.name}</Text>:<Text>Usuario(a): {user.name}</Text>}
       {user.doc===user.name?<Text></Text>:<Text>Psicologo(a): {user.doc}</Text>}</View>
       
       <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
