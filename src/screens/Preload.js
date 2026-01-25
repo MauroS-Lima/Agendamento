@@ -37,8 +37,8 @@ function Preload({navigation}) {
           const b = ['']
           const alteration = (AlterationsData != null) ? AlterationsData : b;
 
-          const clientes = JSON.parse(await AsyncStorage.getItem('pacientes')) 
-
+          const p = Users.filter((u) => u.docName===user & user !== u.name)
+          const clientes = p.map((x) => x.name)
 
           userDispatch({ 
             type:'login',
