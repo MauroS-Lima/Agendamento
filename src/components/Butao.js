@@ -13,7 +13,7 @@ function Butao({color='blue', text='test', onClick=null, size=10, borda=0, marge
           marginTop: top,
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: 8,
+          borderRadius: 10,
           borderColor: '#fff',
           borderWidth: borda,
 
