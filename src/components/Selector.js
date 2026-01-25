@@ -16,9 +16,9 @@ const Selector = ({prop}) => {
         marginVertical: 1,
         marginHorizontal: 4,
         backgroundColor: color,
-        padding: 3,
+        paddingVertical: 7,
+        paddingHorizontal: 12,
         borderRadius: 10,
-        height:30,
         justifyContent: "center",
       }}
     >
