@@ -3,23 +3,22 @@ import React, { useState, useContext } from 'react';
 
 import styles from '../styles';
 
-const test = {data: '28 Dez', hora: '12:00', subject: 'Disponível'}
-
 const Selector = ({prop}) => {
   //console.log(prop)
-  const color =(prop.active==='Disponível' ? 'lightgreen' : prop.active==='Indisponível' ? '#eee' : 'dodgerblue')
+  const color = (prop.active==='Disponível' ? 'lightgreen' : prop.active==='Indisponível' ? '#eee' : prop.doc ? 'dodgerblue' : 'red')
+  const show = ( prop.doc ? prop.active : 'Ocupado')
+  const padd = (!(prop.active==='Disponível'||prop.active==='Indisponível') ? 2 : 13)
   return (
     <View style={{
         marginVertical: 1,
         backgroundColor: color,
-        padding: 3,
-        height:30,
+        paddingVertical: 7,
+        paddingHorizontal: padd,
         justifyContent: "center",
       }}>
 
-      {!(prop.active==='Disponível'||prop.active==='Indisponível') ? <Text style={styles.time}>{prop.active}</Text> : prop.hour < 6 ? <Text style={styles.time}>{prop.hour+7}:30</Text>:<Text style={styles.time}>{prop.hour+7}:00</Text>}
-      
-      </View>
+      {!(prop.active==='Disponível'||prop.active==='Indisponível') ? <Text style={styles.time}>{show}</Text> : prop.hour < 6 ? <Text style={styles.time}>{prop.hour+7}:30</Text>:<Text style={styles.time}>{prop.hour+7}:00</Text>}
+      </View> 
   )
 }
 
