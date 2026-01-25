@@ -19,9 +19,13 @@ function SignIn({navigation}) {
   const {dispatch: userDispatch}=useContext(UserContext)
   const [ usuario, setUsuario ] = useState('');
   const [ senha, setSenha ] = useState('');
+  
   //const pacientes = p.map((x) => x.name);
 
   const Login= async() =>{
+
+    const userList = JSON.parse(await AsyncStorage.getItem('users'));
+    const Users = (userList != null) ? userList : users;
 
     //const UserData = JSON.parse(await AsyncStorage.getItem('users'));
 
@@ -29,7 +33,7 @@ function SignIn({navigation}) {
     //let json = await Api.signIn(usuario,senha);
     
     if ( usuario != '' && senha != ''){
-      if(users.some((u)=>u.name===usuario && u.password===senha)){ 
+      if(Users.some((u)=>u.name===usuario && u.password===senha)){ 
         const data = users.filter((u)=>u.name===usuario && u.password===senha)  //internal data -> Api
 
         await AsyncStorage.setItem('token', data[0].token)
@@ -43,12 +47,8 @@ function SignIn({navigation}) {
         const b = ['']
         const alteration = (AlterationsData != null) ? AlterationsData : b;
 
-        const p = users.filter((u) => u.docName===data[0].name & u.docName !== u.name)
+        const p = Users.filter((u) => u.docName===data[0].name & u.docName !== u.name)
         const clientes = p.map((x) => x.name)
-        await AsyncStorage.setItem('pacientes', JSON.stringify(clientes))
-
-        const userList = JSON.parse(await AsyncStorage.getItem('users'));       //Internal schedule -> Api
-        const Users = (userList != null) ? userList : users;
       
 
       
@@ -93,8 +93,7 @@ function SignIn({navigation}) {
         onChangeText={setSenha}
         secureTextEntry
       />
-      <Butao text={'Login'} onClick={() => Login(usuario, senha)}/>
-      <Butao text={'clear'} onClick={() => AsyncStorage.clear()}/>
+      <Butao text={'Login'} onClick={() => Login(usuario, senha)}/> 
 
     </View>
   );
