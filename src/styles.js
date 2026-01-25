@@ -34,7 +34,12 @@ export default StyleSheet.create({
     marginLeft: 5,
 
   },
-
+  title: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingVertical: 5,
+    
+  },
   header: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -54,8 +59,8 @@ export default StyleSheet.create({
   day: {
     borderWidth: 1,
     marginRight: 2,
-    width: 60,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+
   },
   toggle: {
     marginVertical: 2,
@@ -64,7 +69,7 @@ export default StyleSheet.create({
   },
   profile: {
     backgroundColor: "#fff",
-    padding:20,
+    padding: 15,
     justifyContent: "center",
     borderRadius: 10,
     marginTop: 20,
