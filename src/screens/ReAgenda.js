@@ -7,6 +7,7 @@ import Api from  '../Api';
 import Card from '../components/Card'
 import { UserContext } from '../contexts/UserContext'
 import WeekView from '../components/WeekView'
+import SchedView from '../components/SchedView'
 
 
 
@@ -18,7 +19,7 @@ function ReAgenda({navigation}) {
   const { data:user} = useContext(UserContext);
   return(
       <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
-      <WeekView/>
+      <SchedView/>
       </ScrollView>
   );
 }
