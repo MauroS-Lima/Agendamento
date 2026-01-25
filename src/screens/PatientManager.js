@@ -39,21 +39,21 @@ function Manager({navigation}) {
         })
         setNome('')
         setSenha('')
-        setPsy(docs[0])
         await AsyncStorage.setItem('users', JSON.stringify(Users))
         alert('Usuario adicionado!')
 
-    }else{alert('Usuario já existente!');}
+    }else{alert('Usuario já existente!');} 
   }else {
-    alert('Preencha todos os campos!') 
+    alert('Preencha todos os campos!')
   }
 }
 
 const loginDelete = async() => {
+  Users = user.users.filter(d => d.name !==  usuario)
   userDispatch({
-    type:'removeUser', payload: { name: usuario }
+    type:'addUser', payload: Users
     })
-  await AsyncStorage.setItem('users', JSON.stringify(user.users)) 
+  await AsyncStorage.setItem('users', JSON.stringify(Users)) 
 }
 
   return (
@@ -84,7 +84,7 @@ const loginDelete = async() => {
 
     <View style = {{ alignItems: "center", justifyContent: "center", marginTop: 20 }}>
         <Text style={styles.header}>Remover usuário:</Text>
-        <ScrollView horizontal style={{ flexDirection: 'row', padding :5, marginBottom: 10 }}> x 
+        <ScrollView horizontal style={{ flexDirection: 'row', padding :5, marginBottom: 10 }}>
         {pacs.map((a) => ( <Butao text={a} onClick={() => setUsuario(a)} color={ a === usuario ? 'black' : 'grey' } size={6} /> ))} 
         </ScrollView> <Butao text={'Excluir'} color='red' onClick={() => loginDelete() }/>
       </View>
