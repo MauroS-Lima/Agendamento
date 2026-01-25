@@ -50,13 +50,6 @@ const DataReducer = (data, action) => {
     case 'addUser': {
       return {...data, users: action.payload} 
     }
-
-    case 'removeUser': {
-      console.log('data1', data.users)
-      console.log('action1', action.payload.name)
-      console.log(data.users.filter(d => d.name !== action.payload.name))
-      return {...data, users: data.users.filter(d => d.name !== action.payload.name)};
-    }
     
     default:
       console.log('não foi')
