@@ -10,7 +10,7 @@ import { UserContext } from '../contexts/UserContext'
 import Butao from './Butao'
 import Schedule from '../MockData/Schedule'
 
-const dayStr = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
+const dayStr = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 const textStr = ['Cronograma da semana', 'Selecione um horario para o paciente', 
 'Selecione seus horarios de consulta', 'Selecione uma data disponivel para reagendar'];
 
@@ -91,13 +91,13 @@ function WeekView({mode=0}) {
         {textStr[mode]}:
       </Text>
 
-      <ScrollView horizontal style={{alignItems: "left", marginTop: 14}} >
-        <View style={{ flexDirection: 'row', alignItems: "left", padding: 5, marginBottom: 10, backgroundColor: "#0EADBE",}}>
+      <ScrollView horizontal style={{marginTop: 14, padding: 5, backgroundColor: "#0EADBE",}} >
+        
           {[...Array(7)].map((_, dia) => (
             <View
               style={styles.day}
             >
-              <Text style={{ fontWeight: 'bold', textAlign: 'center', marginBottom: 5}}>
+              <Text style={styles.title}>
                 {dayStr[dia]}
               </Text>
               {[...Array(14)].map((_, i) => {
@@ -125,7 +125,6 @@ function WeekView({mode=0}) {
               })}
             </View>
           ))}
-        </View>
       </ScrollView> 
 
       { mode !== 0 ? <View style={{flexDirection: 'row'}}><Butao text={'Salvar'} onClick={saveDisp}/> 
