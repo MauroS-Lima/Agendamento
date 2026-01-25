@@ -8,15 +8,16 @@ const PSelector = ({prop}) => {
   //console.log(prop)    paciente 
   const [modal, setModal] = useState(false);
   const color =(prop.active==='Disponível' ? 'green' : prop.active==='Indisponível' ? '#eee' : 'dodgerblue')
+  const padd = (!(prop.active==='Disponível'||prop.active==='Indisponível') ? 2 : 12)
   return (
     <View><TouchableOpacity
       onPress={() => { if( prop.active !== 'Indisponível' ){ setModal(true) } } }
       style={{
         marginVertical: 1,
         backgroundColor: color,
-        padding: 3,
+        paddingVertical: 7,
+        paddingHorizontal: padd,
         borderRadius: 10,
-        height:30,
         marginHorizontal: 4,
         justifyContent: "center",
       }}
@@ -30,3 +31,4 @@ const PSelector = ({prop}) => {
 export default PSelector;
 //<Text style={styles.time}>{active}</Text>
 //prop.onToggle(prop)
+
