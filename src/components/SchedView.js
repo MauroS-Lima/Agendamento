@@ -45,7 +45,17 @@ function SchedView({logOff, mode=0}) {
   const saveChanges = async(props) => {
     num = new Date(props.data.getFullYear(), props.data.getMonth(), props.data.getDate(), props.hour+7)
 
-    //userDispatch({type:'reschedule', payload: {alterations: Changes} });
+    x = [...user.alterations, { name: user.name, time: num }]
+
+    console.log(x)
+
+    userDispatch({type:'reschedule', payload: {alterations: x} });
+
+    console.log(x)
+
+
+    //await AsyncStorage.setItem('Alterations', JSON.stringify(x))
+    //setChanges([...user.alterations, { name: user.name, time: num }]) 
 
     //sending=JSON.stringify(Changes)
 
