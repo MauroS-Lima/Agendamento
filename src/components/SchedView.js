@@ -2,11 +2,14 @@ import { StyleSheet, Text, TouchableOpacity, ScrollView, View, Modal } from 'rea
 import React, { useState, useContext } from 'react';
 import AsyncStorage from "@react-native-community/async-storage"
 
+
 import styles from '../styles'
 import Display from './Display'
 import { UserContext } from '../contexts/UserContext'
 import Butao from './Butao'
+import Butao2 from './Butao2'
 import Schedule from '../MockData/Schedule'
+import RSelector from './RSelector'
 
 const dayStr = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 const textStr = ['Cronograma da semana', 'Selecione uma data disponivel para reagendar'];
@@ -20,36 +23,38 @@ function SchedView({logOff, mode=0}) {
   const [Changes, setChanges] = useState(user.alterations);
   const [Lista, setLista] = useState(user.weekly);
 
-  const now = new Date(new Date(2026, 0, 28).toDateString())
+  const now = new Date(new Date().toDateString())
 
   const [ Data, setData] = useState(now)
 
   const data = (dia) => {
-    num = new Date(new Date(Data.valueOf()+((dia - Data.getDay())*86400000)))
+    num = new Date(Data.valueOf()+((dia - Data.getDay())*86400000))
     return(num)    
   }
 
-  const saveDisp = async() => {
-    userDispatch({type:'reschedule', payload: {alterations: Changes} });
+  const weekAdd = () => {
+    num = new Date(Data.valueOf() + 604800000)
+    setData(num)
+  }
 
-    sending=JSON.stringify(Changes)
+  const weekSub = () => {
+    num = new Date(Data.valueOf() - 604800000)
+    setData(num)
+  }
 
-    AsyncStorage.setItem('alterations', sending)
+  const saveChanges = async(props) => {
+    num = new Date(props.data.getFullYear(), props.data.getMonth(), props.data.getDate(), props.hour+7)
+
+    //userDispatch({type:'reschedule', payload: {alterations: Changes} });
+
+    //sending=JSON.stringify(Changes)
+
+    //AsyncStorage.setItem('alterations', sending)
 
   };
+  
 
-  const clearDisp = async() => { 
-
-    setLista(Schedule)
-   
-    userDispatch({type:'scheduleRemove', alterations: {weekly: Changes} });
-
-    sending=JSON.stringify(Lista)
-
-    AsyncStorage.removeItem(user.name)
-    };
-
-  const pickSlot = (props) => {
+  const selectSlot = (props) => {
     if (props.active !== 'Indisponível') { 
       setLista((s) =>
         s.map((dia,i) => i === props.day ? dia.map(
@@ -74,13 +79,11 @@ function SchedView({logOff, mode=0}) {
       <Text style={styles.header}>
         {textStr[mode]}:
       </Text>
-
-      <ScrollView horizontal style={{ marginTop: 14, padding: 5, backgroundColor: "#0EADBE",}} >
-      
+      <ScrollView horizontal style={{ padding: 5, backgroundColor: "#0EADBE", marginTop: 10}} >
           {[...Array(7)].map((_, dia) => (
 
             <View style={data(dia).valueOf() === now.valueOf() ? {...styles.day, borderWidth: 3, } : 
-            mode === 1 && data(dia).valueOf()<now.valueOf() ? {...styles.day, backgroundColor: '#ccc'} : styles.day} >
+            (mode === 1) && data(dia).valueOf() < now.valueOf() ? {...styles.day, backgroundColor: '#ccc'} : styles.day} >
 
               <Text style={styles.title}>
                 {dayStr[dia]}{'\n'}{JSON.stringify(data(dia).getDate()) + '/' + JSON.stringify(data(dia).getMonth() + 1)}
@@ -91,18 +94,25 @@ function SchedView({logOff, mode=0}) {
             
                 const ativo = Lista[dia][hora]
                 
-                const x = {day:dia, hour: hora, active: ativo, doc: user.name === user.doc, diaSem: dayStr, type: mode,
-                clear: clearSlot, onToggle: pickSlot }
+                const x = {day:dia, hour: hora, active: ativo, doc: user.name === user.doc, diaSem: dayStr, type: 2, data: data(dia),
+                onToggle: saveChanges }
 
-                if( mode === 1 && dia>now.getDay() ) { return( <Display prop={x}/> )
-                } else return(<Display prop={x}/>) 
+                if( mode === 1 && data(dia).valueOf() > now.valueOf() && ativo === 'Disponível') { return( <RSelector prop={x}/> )
+                } else return( <Display prop={x}/>) 
                 
               })}
             </View>
           ))}        
       </ScrollView> 
 
-      <Butao text={'Logoff'} margen={15} color={'red'} onClick={() => logOff()}/>
+      <View style = {{backgroundColor: "#0EADBE", justifyContent: "center", alignItems: "center", flexDirection: 'row',
+      borderBottomRightRadius: 10, borderBottomLeftRadius: 15, }} >
+      <Butao2 onClick={() =>weekSub()}/>
+      <Butao text={'Logoff'} margen={2} size={7} color={'red'} onClick={() => logOff()}/>
+      <Butao2 text='arrow-right-drop-circle' onClick={() =>weekAdd()}/>
+      </View>
+
+      
 
     </ScrollView>
   );
