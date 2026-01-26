@@ -28,7 +28,7 @@ const Card = ({props, power}) => {
         <TouchableOpacity style={styles.actionButton1} onPress={() => power(false)}>
           <Text style={styles.actionText1}>Cancelar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton2} onPress={() => {if(props.type===1) { click() }} }>
+        <TouchableOpacity style={styles.actionButton2} onPress={() =>  { click() } }>
           <Text style={styles.actionText2}>Alterar</Text>
         </TouchableOpacity>
       </View>
