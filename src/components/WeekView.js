@@ -106,7 +106,7 @@ function WeekView({mode=0}) {
             
                 const ativo = Lista[dia][hora]
                 
-                const x = {day:dia, hour: hora, active: ativo, paciente: Paciente, diaSem: dayStr, type: mode,
+                const x = {day:dia, hour: hora, active: ativo, paciente: Paciente, diaSem: dayStr, type: 0,
                 clear: clearSlot, onToggle: mode===0 ? toggleSlot : pickSlot
                 }
 
@@ -132,8 +132,4 @@ function WeekView({mode=0}) {
 export default WeekView;
 
 //<Butao text={'Limpar'} color = {'red'} onClick={() => {user.pacientes.map((a) => {clearSlot({ paciente: a })})}}/> 
-//  const clearDisp = async() => { AsyncStorage.removeItem(name) };
-
-
-//<Butao text={'Salvar'} color = {'red'} onClick={() => {user.pacientes.map((a) => {clearSlot({ paciente: a })})}}/> 
 //  const clearDisp = async() => { AsyncStorage.removeItem(name) };
