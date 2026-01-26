@@ -13,17 +13,19 @@ const textStr = ['Cronograma da semana', 'Selecione uma data disponivel para rea
 
 
 
-function SchedView({mode=0}) {
+function SchedView({logOff, mode=0}) {
   const { data:user} = useContext(UserContext);
   const { dispatch: userDispatch } = useContext(UserContext);
 
   const [Changes, setChanges] = useState(user.alterations);
   const [Lista, setLista] = useState(user.weekly);
 
-  const now = new Date(2026,0,27)
+  const now = new Date(new Date(2026, 0, 28).toDateString())
+
+  const [ Data, setData] = useState(now)
 
   const data = (dia) => {
-    num = new Date(new Date(now.valueOf()+((dia-now.getDay())*86400000)))
+    num = new Date(new Date(Data.valueOf()+((dia - Data.getDay())*86400000)))
     return(num)    
   }
 
@@ -63,19 +65,22 @@ function SchedView({mode=0}) {
     
   };
  
-//color={ Lista.some((x) => { x.some((y) => { y === a }) }) ? 'navi' : '#ccc' } 
   return (
-    <View style={styles.weekly} >
+    <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
+
+    <View style = {styles.profile} >{user.doc===user.name?<Text>Doutor(a) {user.name}</Text>:<Text>Usuario(a): {user.name}</Text>}
+      {user.doc===user.name?<Text></Text>:<Text>Psicologo(a): {user.doc}</Text>}</View>
 
       <Text style={styles.header}>
         {textStr[mode]}:
       </Text>
 
-      <ScrollView horizontal style={{ marginTop: 14, padding: 5, backgroundColor: "#0EADBE",}} >        
+      <ScrollView horizontal style={{ marginTop: 14, padding: 5, backgroundColor: "#0EADBE",}} >
+      
           {[...Array(7)].map((_, dia) => (
 
-            <View style={dia === now.getDay() ? {...styles.day, borderWidth: 3, } : 
-            mode === 1 && dia<now.getDay() ? {...styles.day, backgroundColor: '#ccc'} : styles.day} >
+            <View style={data(dia).valueOf() === now.valueOf() ? {...styles.day, borderWidth: 3, } : 
+            mode === 1 && data(dia).valueOf()<now.valueOf() ? {...styles.day, backgroundColor: '#ccc'} : styles.day} >
 
               <Text style={styles.title}>
                 {dayStr[dia]}{'\n'}{JSON.stringify(data(dia).getDate()) + '/' + JSON.stringify(data(dia).getMonth() + 1)}
@@ -97,7 +102,9 @@ function SchedView({mode=0}) {
           ))}        
       </ScrollView> 
 
-    </View>
+      <Butao text={'Logoff'} margen={15} color={'red'} onClick={() => logOff()}/>
+
+    </ScrollView>
   );
 }
 
