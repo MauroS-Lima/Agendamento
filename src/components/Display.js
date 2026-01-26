@@ -5,7 +5,7 @@ import styles from '../styles';
 
 const Selector = ({prop}) => {
   //console.log(prop)
-  const color = (prop.active==='Disponível' ? 'lightgreen' : prop.active==='Indisponível' ? '#eee' : prop.doc ? 'dodgerblue' : 'red')
+  const color = (prop.active==='Disponível' ? 'lightgreen' : prop.active==='Indisponível' ? '#eee' : prop.doc ? 'dodgerblue' : 'indianred')
   const show = ( prop.doc ? prop.active : 'Ocupado')
   const padd = (!(prop.active==='Disponível'||prop.active==='Indisponível') ? 2 : 13)
   return (
