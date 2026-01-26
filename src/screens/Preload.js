@@ -34,7 +34,7 @@ function Preload({navigation}) {
 
          
           const AlterationsData = JSON.parse(await AsyncStorage.getItem('alterations'));
-          const b = ['']
+          const b = []
           const alteration = (AlterationsData != null) ? AlterationsData : b;
 
           const p = Users.filter((u) => u.docName===user & user !== u.name)
