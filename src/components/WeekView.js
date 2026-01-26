@@ -82,11 +82,11 @@ function WeekView({mode=0}) {
   return (
     <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
 
-      {(mode === 1) ? <View> <Text style={styles.header}>{text}</Text>
-      <ScrollView horizontal style={{ flexDirection: 'row', padding:5 }}>{user.pacientes.map((a) => (
-        <Butao text={a} top={14} onClick={() => setPaciente(a)} borda={ a===Paciente ? 2 : 0 } size={6} 
+      {(mode === 1) ? <Text style={styles.header}>{text}</Text> : <Text></Text>}
+      {(mode === 1) ? <ScrollView horizontal style={{ flexDirection: 'row' }}>{user.pacientes.map((a) => (
+        <Butao text={a} top={14} onClick={() => setPaciente(a)} borda={ a===Paciente ? 2 : 0 } size={6}
         color={ Lista.some((x) => x.some((y) =>  y === a ) ) ? 'dodgerblue' : '#888' }/> 
-        ))} </ScrollView></View> : <Text></Text>}
+        ))} </ScrollView> : <Text></Text>}
 
       <Text style={styles.header}>
         {textStr[mode]}:
