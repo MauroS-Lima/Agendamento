@@ -1,7 +1,6 @@
 import React, {useState, useContext} from 'react';
 import { Text, View, ScrollView, TextInput, Modal } from 'react-native'
 import AsyncStorage from "@react-native-community/async-storage"
-import useNavigation from '@react-navigation/native'
 
 import styles from '../styles';
 import Api from '../Api';
@@ -60,7 +59,7 @@ const loginDelete = async() => {
     <View style = {{flex: 1, backgroundColor: "#63c2d1", justifyContent: "center"}}>
 
       <View style = {{ alignItems: "center", justifyContent: "center", marginTop: 20 }}>
-        <Text style={styles.header}>Adicionar usuário:</Text>      
+        <Text style={styles.header}>Adicionar paciente:</Text>      
         <ScrollView horizontal style={{ flexDirection: 'row', padding :5, }}> <Text style={styles.text}>Psicólogo(a): </Text> 
         {docs.map((a) => ( <Butao text={a} onClick={() => setPsy(a)} color={ a===psy ? 'blue' : '#888' } size={6} /> ))} 
         </ScrollView>
@@ -83,7 +82,7 @@ const loginDelete = async() => {
       </View>
 
     <View style = {{ alignItems: "center", justifyContent: "center", marginTop: 20 }}>
-        <Text style={styles.header}>Remover usuário:</Text>
+        <Text style={styles.header}>Remover paciente:</Text>
         <ScrollView horizontal style={{ flexDirection: 'row', padding :5, marginBottom: 10 }}>
         {pacs.map((a) => ( <Butao text={a} onClick={() => setUsuario(a)} color={ a === usuario ? 'black' : 'grey' } size={6} /> ))} 
         </ScrollView> <Butao text={'Excluir'} color='red' onClick={() => loginDelete() }/>
