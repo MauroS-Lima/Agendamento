@@ -16,10 +16,13 @@ const Tab = createBottomTabNavigator();
 
 function MainTab({navigation}) {
   const { data:user } = useContext(UserContext);
+
+  const Size = () =>  user.name === user.doc ? 60 : 0 
+
   //if (user.name === user.doc) {}
   return(
     <Tab.Navigator screenOptions={{
-      tabBarStyle: { backgroundColor: "#fff", height:60 },
+      tabBarStyle: { backgroundColor: "#fff", height:Size() },
       tabBarInactiveTintColor:'#888',
       tabBarActiveTintColor:"#e77",
        }} //initialRouteName="Vagas" 
@@ -28,14 +31,14 @@ function MainTab({navigation}) {
       <Tab.Screen name='Home' component={Home} 
       options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="account" color={color} size={26} />)}} />
 
-      <Tab.Screen name='Agenda' component={Agenda} 
-      options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="calendar-account" color={color} size={26} />)}} />
+      { user.name === user.doc ? <Tab.Screen name='Agenda' component={Agenda} 
+      options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="calendar-account" color={color} size={26} />)}} /> : null}
 
-      <Tab.Screen name='Vagas' component={Vagas} 
-      options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="calendar-edit" color={color} size={26} />)}} />
+      { user.name === user.doc ? <Tab.Screen name='Vagas' component={Vagas} 
+      options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="calendar-edit" color={color} size={26} />)}} /> : null}
 
-      <Tab.Screen name='Pacientes' component={PatientManager} 
-      options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="account-edit" color={color} size={26} />)}} />
+      { user.name === user.doc ? <Tab.Screen name='Pacientes' component={PatientManager} 
+      options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="account-edit" color={color} size={26} />)}} /> : null}
 
     </Tab.Navigator>
   );
