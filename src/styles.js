@@ -24,7 +24,9 @@ export default StyleSheet.create({
   scroller: {
     flex: 1,
     backgroundColor: "#63c2d1",
-    justifyContent: "top",
+    justifyContent: "center",
+    padingVertical: 10,
+    alignItems: "center",
 
   },
   scrollerCont: {
@@ -72,14 +74,9 @@ export default StyleSheet.create({
     padding: 15,
     justifyContent: "center",
     borderRadius: 10,
-    marginTop: 20,
+    marginTop: 5,
+    marginBottom: 15,
     alignItems: "center",
   },
-  weekly: {
-    marginTop: 10,
-    backgroundColor: "#63c2d1",
-    marginBottom: 10,
-    alignItems: "center",
-  }
 });
 //backgroundColor: "#4EADBE",
