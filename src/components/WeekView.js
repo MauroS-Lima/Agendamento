@@ -11,8 +11,8 @@ import Butao from './Butao'
 import Schedule from '../MockData/Schedule'
 
 const dayStr = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
-const textStr = ['Cronograma da semana', 'Selecione um horario para o paciente', 
-'Selecione seus horarios de consulta', 'Selecione uma data disponivel para reagendar'];
+const textStr = ['Selecione seus horarios de consulta', 'Selecione um horario para o paciente', ];
+const clear = ['Limpar', 'Remover'];
 
 
 
@@ -80,9 +80,10 @@ function WeekView({mode=0}) {
  
 //color={ Lista.some((x) => { x.some((y) => { y === a }) }) ? 'navi' : '#ccc' }
   return (
-    <View style={styles.weekly} >
+    <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
 
-      {mode === 1 ? <View><Text style={styles.header}>{text}</Text><ScrollView horizontal style={{ flexDirection: 'row', padding:5 }}>{user.pacientes.map((a) => (
+      {(mode === 1) ? <View> <Text style={styles.header}>{text}</Text>
+      <ScrollView horizontal style={{ flexDirection: 'row', padding:5 }}>{user.pacientes.map((a) => (
         <Butao text={a} top={14} onClick={() => setPaciente(a)} borda={ a===Paciente ? 2 : 0 } size={6} 
         color={ Lista.some((x) => x.some((y) =>  y === a ) ) ? 'dodgerblue' : '#888' }/> 
         ))} </ScrollView></View> : <Text></Text>}
@@ -91,7 +92,7 @@ function WeekView({mode=0}) {
         {textStr[mode]}:
       </Text>
 
-      <ScrollView horizontal style={{marginTop: 14, padding: 5, backgroundColor: "#0EADBE",}} >
+      <ScrollView horizontal style={{marginTop: 14, padding: 5, backgroundColor: "#0EADBE"}} >
         
           {[...Array(7)].map((_, dia) => (
             <View
@@ -106,36 +107,33 @@ function WeekView({mode=0}) {
                 const ativo = Lista[dia][hora]
                 
                 const x = {day:dia, hour: hora, active: ativo, paciente: Paciente, diaSem: dayStr, type: mode,
-                clear: clearSlot, onToggle: mode===2 ? toggleSlot : pickSlot
-                }  
-
-                switch(mode){
-                  case 3:{
-                    return(<Display prop={x}/>)
-                  }
-                  case 2:{
-                    return(<Selector prop={x}/>)
-                  }
-                  case 1:{
-                    return(<PSelector prop={x}/>)
-                  }
-                  default: return(<Display prop={x}/>)
+                clear: clearSlot, onToggle: mode===0 ? toggleSlot : pickSlot
                 }
+
+                if( mode === 1 ){return(<PSelector prop={x}/>)} else return(<Selector prop={x}/>)
+
+              
                 
               })}
             </View>
           ))}
       </ScrollView> 
 
-      { mode !== 0 ? <View style={{flexDirection: 'row'}}><Butao text={'Salvar'} onClick={saveDisp}/> 
-      <Butao text={'Limpar'} color = {'red'} onClick={() => {if(mode===1){
-        user.pacientes.map((a) => {clearSlot({ paciente: a })})
-        }else{clearDisp()}}}/></View> : <Text></Text>}
-    </View>
+      <View style={{flexDirection: 'row', marginVertical: 10}}>
+        <Butao text={'Salvar'} onClick={saveDisp}/> 
+        <Butao text={clear[mode]} color = {'red'} onClick={() => {if(mode===1){
+          clearSlot({ paciente: Paciente })} else {clearDisp()}}}
+        />
+      </View> 
+    </ScrollView>
   );
 }
 
 export default WeekView;
+
+//<Butao text={'Limpar'} color = {'red'} onClick={() => {user.pacientes.map((a) => {clearSlot({ paciente: a })})}}/> 
+//  const clearDisp = async() => { AsyncStorage.removeItem(name) };
+
 
 //<Butao text={'Salvar'} color = {'red'} onClick={() => {user.pacientes.map((a) => {clearSlot({ paciente: a })})}}/> 
 //  const clearDisp = async() => { AsyncStorage.removeItem(name) };
