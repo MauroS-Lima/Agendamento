@@ -18,13 +18,13 @@ const PSelector = ({prop}) => {
         paddingVertical: 7,
         paddingHorizontal: padd,
         borderRadius: 10,
-        marginHorizontal: 4,
+
         justifyContent: "center",
       }}
     > 
     {!(prop.active==='Disponível'||prop.active==='Indisponível') ? <Text style={styles.time}>{prop.active}</Text> : prop.hour < 6 ? <Text style={styles.time}>{prop.hour+7}:30</Text>:<Text style={styles.time}>{prop.hour+7}:00</Text>}
     
-    </TouchableOpacity><Modal transparent={true} visible={modal} onRequestClose={()=>{setModal(false)}}><Card props={prop} power={setModal} /></Modal></View>
+    </TouchableOpacity><Modal transparent={true} visible={modal} onRequestClose={()=>{setModal(false)}}><Card props={{...prop, power: setModal}} /></Modal></View>
   )
 }
 
