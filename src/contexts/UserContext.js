@@ -39,7 +39,7 @@ const DataReducer = (data, action) => {
       };
     }
     case 'reschedule': {
-      return {...data, alterations: [...data.alterations, action.payload]};
+      return {...data, alterations: action.payload};
     }
     case 'scheduleRemove': {
       return {...data,
