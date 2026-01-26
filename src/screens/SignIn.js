@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {Text, View, Button, TextInput, Image} from 'react-native'
+import { View, TextInput, Image } from 'react-native'
 import AsyncStorage from "@react-native-community/async-storage"
 import useNavigation from '@react-navigation/native'
 
