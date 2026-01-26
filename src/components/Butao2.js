@@ -10,10 +10,11 @@ function Butao({color='white', text='arrow-left-drop-circle', onClick=null, size
           padding: size,
           margin: margen,
           marginTop: 0,
+          marginBottom: 10,
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: '100%',
-          backgroundColor: "#63c2d1"
+          backgroundColor: "#63c2d1",
         }}
       >
         <MaterialCommunityIcons name={text} color={color} size={36} />
