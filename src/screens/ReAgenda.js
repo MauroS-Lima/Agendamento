@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Text, View, ScrollView, TouchableOpacity} from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage'
+import { ScrollView } from 'react-native'
 
 import styles from '../styles';
 import Api from  '../Api';
@@ -17,11 +16,7 @@ const test = {data: '28 Dez', hora: '12:00', subject: 'Disponível'}
 
 function ReAgenda({navigation}) {
   const { data:user} = useContext(UserContext);
-  return(
-      <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
-      <SchedView/>
-      </ScrollView>
-  );
+  return( <SchedView/> );
 }
 
 export default ReAgenda;
