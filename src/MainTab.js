@@ -7,7 +7,7 @@ import {UserContext} from './contexts/UserContext'
 
 import Vagas from './screens/Vagas';
 import Agenda from './screens/Agenda';
-import Profile from './screens/Profile';
+import Home from './screens/Home';
 import PatientManager from './screens/PatientManager'
 
 const Tab = createBottomTabNavigator();
@@ -16,15 +16,16 @@ const Tab = createBottomTabNavigator();
 
 function MainTab({navigation}) {
   const { data:user } = useContext(UserContext);
+  //if (user.name === user.doc) {}
   return(
     <Tab.Navigator screenOptions={{
       tabBarStyle: { backgroundColor: "#fff", height:60 },
       tabBarInactiveTintColor:'#888',
       tabBarActiveTintColor:"#e77",
-       }} //initialRouteName="Perfil" 
+       }} //initialRouteName="Vagas" 
        >
 
-      <Tab.Screen name='Perfil' component={Profile} 
+      <Tab.Screen name='Home' component={Home} 
       options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="account" color={color} size={26} />)}} />
 
       <Tab.Screen name='Agenda' component={Agenda} 
@@ -33,11 +34,12 @@ function MainTab({navigation}) {
       <Tab.Screen name='Vagas' component={Vagas} 
       options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="calendar-edit" color={color} size={26} />)}} />
 
-      <Tab.Screen name='Usuarios' component={PatientManager} 
+      <Tab.Screen name='Pacientes' component={PatientManager} 
       options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="account-edit" color={color} size={26} />)}} />
 
     </Tab.Navigator>
   );
+  //} else return()
 }
 //{ user.doc === user.name ? }
 // account-edit
