@@ -7,7 +7,9 @@ import styles from '../styles';
 import SchedView from '../components/SchedView'
 
 function Home({navigation}) {
+
   const {dispatch: userDispatch} = useContext(UserContext)
+  const { data: user } = useContext(UserContext);
 
   const LogOff = async()=>{
     navigation.reset({routes:[{name:'Preload'}]})
@@ -15,7 +17,7 @@ function Home({navigation}) {
     userDispatch({type: 'logoff'})
   }
   
-  return( < SchedView logOff={LogOff} /> );
+  return( < SchedView logOff={LogOff} mode = {user.name === user.doc ? 0 : 1} /> );
 }
 //<Butao text={'LOGOFF'} color={'red'} onClick={logOff()}/>
 export default Home;
