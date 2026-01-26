@@ -15,11 +15,11 @@ function Butao({color='blue', text='test', onClick=null, size=10, borda=0, marge
           justifyContent: 'center',
           borderRadius: 10,
           borderColor: '#fff',
-          borderWidth: borda,
+          borderWidth: borda, 
 
         }}
       >
-        <Text style={{ color: 'white', fontWeight: 'bold' }}>
+        <Text style={{ color: 'white', fontWeight: 'bold' }}> 
           {text}
         </Text>
       </TouchableOpacity>
