@@ -1,44 +1,26 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {Text, View, ScrollView, TouchableOpacity} from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage'
+import React, {useContext} from 'react';
+import {ScrollView} from 'react-native'
+import AsyncStorage from "@react-native-community/async-storage"
 
+import {UserContext} from '../contexts/UserContext';
 import styles from '../styles';
-import Api from  '../Api';
-import Card from '../components/Card'
-import { UserContext } from '../contexts/UserContext'
-import WeekView from '../components/WeekView'
-import Weekly from '../components/Weekly'
-
-
-
-const test = {data: '28 Dez', hora: '12:00', subject: 'Disponível'}
-
-const Section = (data) =>{
-
-  return(
-    <View style={styles.scrollerTab}>
-      {data.doc===data.user?<Text>Psicologo(a) {data.user}</Text>:<Text>Psicologo(a){data.user}</Text>}
-      {data.doc=data.user?<Text></Text>:<Text>Psicologo(a): {data.user}</Text>}
-    </View>  
-  )
-} 
-
-//contentContainerStyle = {styles.scrollerCont}>
+import SchedView from '../components/SchedView'
 
 function Home({navigation}) {
-  const { data:user} = useContext(UserContext);
-  const name = user.name
-  const doc = user.doc
-  const weekly = user.weekly
-  const alterations = user.alterations
-  return(
-      <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
-        <Section user={name} doc={doc}/>
-      {name===doc?<WeekView/>:<ScrollView horizontal><Card props= {test}/></ScrollView>}
-      
-      </ScrollView>
-  );
-}
 
+  const {dispatch: userDispatch} = useContext(UserContext)
+  const { data: user } = useContext(UserContext);
+
+  const LogOff = async()=>{
+    navigation.reset({routes:[{name:'Preload'}]})
+    await AsyncStorage.multiRemove(['name', 'docName', 'token'])
+    userDispatch({type: 'logoff'})
+  }
+  
+  return( < SchedView logOff={LogOff} mode = {user.name === user.doc ? 0 : 1} /> );
+}
+//<Butao text={'LOGOFF'} color={'red'} onClick={logOff()}/>
 export default Home;
-//<Section user={name} doc={doc}/>
+//{dados[0][1]===dados[1][1]?<Text>Psicologo(a)</Text>:<Text>Psicologo(a): {dados[1][1]}</Text>}
+//multiRemove(['name', 'docName', 'token'])
+//clear()

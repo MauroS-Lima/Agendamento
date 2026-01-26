@@ -6,6 +6,7 @@ import Schedule from '../MockData/Schedule'; //Temp
 import styles from '../styles';
 import Api from '../Api'
 import {UserContext} from '../contexts/UserContext';
+import users from '../MockData/Users'
 
 function Preload({navigation}) {
   
@@ -14,29 +15,34 @@ function Preload({navigation}) {
       
     const checkToken = async()=>{
       const token = await AsyncStorage.getItem('token');
-      
+
       //console.log('token', token)
       if(token){
         //let res = await AsyncSorage.getItem('data');        Api token validation
         //if(res.token){
          // await AsyncStorage.setitem('token', res.token);     Token refresh
         if(token==='valido'){        //Temp validation
+
           const user = await AsyncStorage.getItem('name');
           const docName = await AsyncStorage.getItem('docName');
 
-          const ScheduleData = await AsyncStorage.getItem(docName);
-          console.log("result",ScheduleData)
+          const ScheduleData = JSON.parse(await AsyncStorage.getItem(docName));
           const docSchedule = (ScheduleData!=null) ? ScheduleData : Schedule;
 
-          
-          const AlterationsData = await AsyncStorage.getItem('alterations');
-          const b = ['']
-          const alteration = (AlterationsData != null) ? AlterationsData : b;  
+          const UserData = JSON.parse(await AsyncStorage.getItem('users'));
+          const Users = (UserData != null) ? UserData : users;  
 
+         
+          const AlterationsData = JSON.parse(await AsyncStorage.getItem('alterations'));
+          const b = []
+          const alteration = (AlterationsData != null) ? AlterationsData : b;
+
+          const p = Users.filter((u) => u.docName===user & user !== u.name)
+          const clientes = p.map((x) => x.name)
 
           userDispatch({ 
             type:'login',
-            payload: {name: user, doc: docName, weekly: docSchedule, alterations: alteration}
+            payload: { name: user, doc: docName, weekly: docSchedule, alterations: alteration, pacientes: clientes, users: Users }
           })
 
           navigation.reset({routes:[{name:'MainTab'}]})
@@ -51,7 +57,7 @@ function Preload({navigation}) {
 
 
   return (
-    <View style = {styles.container}>
+    <View style = {styles.container1}>
       <Image source={require('../assets/Clinica.jpg')} style={{width: 150, height:150, borderRadius:75, marginBottom:25}}/>
       <Text>Carregando...</Text>
       <ActivityIndicator size='large' color= '#fff'/>

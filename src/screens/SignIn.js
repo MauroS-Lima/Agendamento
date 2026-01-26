@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {Text, View, Button, TextInput, Image} from 'react-native'
+import { View, TextInput, Image } from 'react-native'
 import AsyncStorage from "@react-native-community/async-storage"
 import useNavigation from '@react-navigation/native'
 
@@ -8,6 +8,7 @@ import Api from '../Api';
 import {UserContext} from '../contexts/UserContext';
 import users from '../MockData/Users'; //Temp
 import Schedule from '../MockData/Schedule'; //Temp
+import Butao from '../components/Butao'
 
 
 
@@ -18,26 +19,39 @@ function SignIn({navigation}) {
   const {dispatch: userDispatch}=useContext(UserContext)
   const [ usuario, setUsuario ] = useState('');
   const [ senha, setSenha ] = useState('');
+  
+  //const pacientes = p.map((x) => x.name);
 
   const Login= async() =>{
-  //let json = await Api.signIn(usuario,senha);
 
-  if ( usuario != '' && senha != ''){
-    if(users.some((u)=>u.name===usuario && u.password===senha)){ 
-      const data = users.filter((u)=>u.name===usuario && u.password===senha)  //internal data -> Api
+    const userList = JSON.parse(await AsyncStorage.getItem('users'));
+    const Users = (userList != null) ? userList : users;
 
-      await AsyncStorage.setItem('token', data[0].token)
-      await AsyncStorage.setItem('name', data[0].name)
-      await AsyncStorage.setItem('docName', data[0].docName)
+    //const UserData = JSON.parse(await AsyncStorage.getItem('users'));
 
-      const ScheduleData = await AsyncStorage.getItem(data[0].docName);       //Internal schedule -> Api
-      console.log("result",ScheduleData)
-      const docSchedule = (ScheduleData!=null) ? ScheduleData : Schedule;
+
+    //let json = await Api.signIn(usuario,senha);
+    
+    if ( usuario != '' && senha != ''){
+      if(Users.some((u)=>u.name===usuario && u.password===senha)){ 
+        const data = users.filter((u)=>u.name===usuario && u.password===senha)  //internal data -> Api
+
+        await AsyncStorage.setItem('token', data[0].token)
+        await AsyncStorage.setItem('name', data[0].name)
+        await AsyncStorage.setItem('docName', data[0].docName)
+
+        const ScheduleData = JSON.parse(await AsyncStorage.getItem(data[0].docName));       //Internal schedule -> Api
+        const docSchedule = (ScheduleData != null) ? ScheduleData : Schedule;
+      
+        const AlterationsData = JSON.parse(await AsyncStorage.getItem('alterations'));   //Internal reschedule -> Api
+        const b = ['']
+        const alteration = (AlterationsData != null) ? AlterationsData : b;
+
+        const p = Users.filter((u) => u.docName===data[0].name & u.docName !== u.name)
+        const clientes = p.map((x) => x.name)
+      
 
       
-      const AlterationsData = await AsyncStorage.getItem('alterations');   //Internal reschedule -> Api
-      const b = ['']
-      const alteration = (AlterationsData != null) ? AlterationsData : b;    
 
       
 
@@ -46,7 +60,7 @@ function SignIn({navigation}) {
 
       userDispatch({
         type:'login',
-        payload: {name: data[0].name, doc: data[0].docName, weekly: docSchedule, alterations: alteration}
+        payload: {name: data[0].name, doc: data[0].docName, weekly: docSchedule, alterations: alteration, pacientes: clientes, users: Users }
       })
       
       navigation.reset({routes:[{name:'MainTab'}]})
@@ -61,7 +75,7 @@ function SignIn({navigation}) {
 }
 
   return (
-    <View style = {styles.container}>
+    <View style = {styles.container1}>
       <Image source={require('../assets/Clinica.jpg')} style={{width: 150, height:150, borderRadius:75, marginBottom:50}}/>
         
       <TextInput 
@@ -79,10 +93,14 @@ function SignIn({navigation}) {
         onChangeText={setSenha}
         secureTextEntry
       />
-      <Button title='Login' onPress={()=>{Login(usuario, senha)}} />
+      <Butao text={'Login'} onClick={() => Login(usuario, senha)}/> 
+
     </View>
   );
 }
 //<Button title='home' onPress={() => navigation.navigate('MainTab')} />  debug
 //<Button title='Admin' onPress={() => navigation.navigate('AdmHome')} />   debug
+//<Butao text={'Login'} onClick={() = > await userStorage.clear();}>
+//<Butao text={'clear'} onClick={() => AsyncStorage.clear()}/>
+
 export default SignIn;
