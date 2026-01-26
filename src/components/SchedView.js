@@ -28,7 +28,7 @@ function SchedView({logOff, mode=0}) {
   const [ Data, setData] = useState(now)
 
   const data = (dia) => {
-    num = new Date(Data.valueOf()+((dia - Data.getDay())*86400000))
+    num = new Date(Data.valueOf()+((dia - Data.getDay())*86400000)) 
     return(num)    
   }
 
@@ -84,7 +84,7 @@ function SchedView({logOff, mode=0}) {
     <ScrollView style = {styles.scroller} contentContainerStyle = {styles.scrollerCont}>
 
     <View style = {styles.profile} >{user.doc===user.name?<Text>Doutor(a) {user.name}</Text>:<Text>Usuario(a): {user.name}</Text>}
-      {user.doc===user.name?<Text></Text>:<Text>Psicologo(a): {user.doc}</Text>}</View>
+      {user.doc===user.name?<View></View>:<Text>Psicologo(a): {user.doc}</Text>}</View>
 
       <Text style={styles.header}>
         {textStr[mode]}:
