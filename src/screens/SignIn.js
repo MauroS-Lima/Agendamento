@@ -34,7 +34,7 @@ function SignIn({navigation}) {
     
     if ( usuario != '' && senha != ''){
       if(Users.some((u)=>u.name===usuario && u.password===senha)){ 
-        const data = users.filter((u)=>u.name===usuario && u.password===senha)  //internal data -> Api
+        const data = Users.filter((u)=>u.name===usuario && u.password===senha)  //internal data -> Api
 
         await AsyncStorage.setItem('token', data[0].token)
         await AsyncStorage.setItem('name', data[0].name)

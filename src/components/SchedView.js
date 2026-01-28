@@ -116,9 +116,9 @@ function SchedView({logOff, mode=0}) {
       </ScrollView> 
 
       <View style = {{backgroundColor: "#0EADBE", justifyContent: "center", alignItems: "center", flexDirection: 'row',
-      borderBottomRightRadius: 10, borderBottomLeftRadius: 15, }} >
+      borderBottomRightRadius: 20, borderBottomLeftRadius: 20, paddingTop: 3}} >
       <Butao2 onClick={() =>weekSub()}/>
-      <Butao text={'Logoff'} margen={2} size={7} color={'red'} onClick={() => logOff()}/>
+      <Butao text={'Logoff'} margen={2} size={7} color={'red'} bottom={5} onClick={() => logOff()}/>
       <Butao2 text='arrow-right-drop-circle' onClick={() =>weekAdd()}/>
       </View>
 
