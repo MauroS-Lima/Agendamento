@@ -1,44 +1,13 @@
-X  Week select  --->  WeekDisplay + Selector    
-
-Card  - - -> Appointment View
-
-X Home + admin ---> Main tab
 
 
-X WeekSelect altera semana
-
-reagendamentos --(calendario)-->reagendamentos na semana
-https://github.com/stephy/CalendarPicker
-
+reagendamentos --(calendario)--> reagendamentos na semana
 If (reagendamento na semana) -> alterar copia da semana
-
-week view lê copia alteravel da semana
 
 reagendamento lê copial alteravel da semana e gera [reagendamentos]
 
-lista e usuarios sem agendamento(geral)
+notificar usuario sobre alterações
 
-lista de usuarios sem agendamento na semana
+contabilizar consultas no mês
 
+Connectar ao firebase
 
-
-
-userSelect
-(only latest value)
-
-if ('open') color green  -> add new + remove old
-  else color red
-
-
-x Admin(loop)Select
-
-if ('open') color green
-  else if ('closed') color grey
-     else color yellow -> warning  reschedule user + notify
-
-Admin reschedule Select
-(only latest value)
-
-if ('open') color green
-  else if ('closed') color grey
-     else color red
